@@ -40,15 +40,7 @@ public class GButton extends GElement
 		
 		if (currentFinger != -1)
 		{
-			if (Gdx.input.isTouched(currentFinger))
-			{
-				Vector2 pos = SASUS.viewport.unproject(new Vector2(Gdx.input.getX(), Gdx.input.getY()));
-				if (!rect.contains(pos))
-				{
-					currentFinger = -1;
-				}
-			}
-			else
+			if (!Gdx.input.isTouched(currentFinger))
 			{
 				currentFinger = -1;
 			}
