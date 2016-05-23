@@ -14,6 +14,7 @@ public class MainMenuScreen implements Screen {
 	private GSlider slider;
 	
 	private Sprite arrow;
+	private float prevArrowPos = 0;
 	
 	public MainMenuScreen()
 	{
@@ -49,6 +50,12 @@ public class MainMenuScreen implements Screen {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		SASUS.camera.update();
 		SASUS.batch.setProjectionMatrix(SASUS.camera.combined);
+		
+		if(prevArrowPos != arrow.getY()) {
+			prevArrowPos = arrow.getY();
+			Resources.playSound("ui/select");
+		}
+		
 		SASUS.batch.begin();
 		for (GElement current : buttons)
 		{
