@@ -15,7 +15,9 @@ public class GButton extends GElement
 	public GButton(int _x, int _y, int _w, int _h, String _textureId)
 	{
 		rect = new Rectangle(_x, _y, _w, _h);
-		sprite = new Sprite(Resources.getImage(_textureId), _x, _y, _w, _h);
+		sprite = new Sprite(Resources.getImage(_textureId));
+		sprite.setX(_x);
+		sprite.setY(_y);
 		currentFinger = -1;
 	}
 	@Override

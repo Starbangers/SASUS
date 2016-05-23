@@ -8,10 +8,12 @@ import com.badlogic.gdx.utils.Array;
 public class MainMenuScreen implements Screen {
 	
 	private Array<GElement> buttons = new Array<GElement>();
+	private final int buttonWidth = 100, buttonHeight = 100; 
 	
 	public MainMenuScreen()
 	{
-		buttons.add(new GButton(0, 0, 100, 100, "butt"));
+		buttons.add(new GButton(SASUS.viewport.getScreenWidth()/2 - buttonWidth/2, SASUS.viewport.getScreenHeight()/2- buttonHeight/2,
+								buttonWidth, buttonHeight, "butt"));
 	}
 	
 	@Override
