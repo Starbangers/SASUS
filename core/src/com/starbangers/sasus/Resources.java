@@ -13,13 +13,23 @@ public class Resources {
 	public static HashMap<String, Texture> textures = new HashMap<String, Texture>();
 	public static HashMap<String, Sound> sounds = new HashMap<String, Sound>();
 	
-	public static String loadStep = "Loading...";
-	public static byte loaded = 0;
+	public static volatile String loadStep = "Loading...";
+	public static volatile byte loaded = 0;
 	
-	
+	public static void startLoadThread() {
+		Thread thread = new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				load();
+			}
+			
+		}, "Resource load thread");
+		thread.start();
+	}
 	public static void loadVital() {
 		textures.put("splashscreen", new Texture(Gdx.files.internal("img/Logo.png")));
-		textures.put("ERROR", new Texture(Gdx.files.internal("img/ERROR.png")));
+		//textures.put("ERROR", new Texture(Gdx.files.internal("img/ERROR.png")));
 	}
 	public static void load() {
 
@@ -61,10 +71,11 @@ public class Resources {
 			soundname = soundname.trim();
 			loadStep = "Loading " + soundname;
 			try {
-				sounds.put(soundname, Gdx.audio.newSound(Gdx.files.internal("sound/effects/" + soundname + ".wav")));
+				sounds.put(soundname, Gdx.audio.newSound(Gdx.files.internal("sound/effects/" + soundname + ".ogg")));
 				Gdx.app.log("Resources", "Loaded " + soundname);
 			} catch (Exception e) {
 				Gdx.app.error("Resources", "Failed loading " + soundname);
+				e.printStackTrace();
 				loaded = -1;
 				return;
 			}
@@ -88,7 +99,9 @@ public class Resources {
 		} catch (InterruptedException e) {
 
 		}
-		loaded = 0;
+		loaded = 1;
+		sounds.get("vox/initComplete").play();
+		
 	}
 
 	public static Texture getImage(String name) {
