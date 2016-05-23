@@ -3,6 +3,8 @@ interface/New_Game
 interface/Options
 interface/Quit
 interface/Arrow
+interface/SliderScale
+interface/SliderSlide
 interface/ScreenBorders
 player/ref
 null

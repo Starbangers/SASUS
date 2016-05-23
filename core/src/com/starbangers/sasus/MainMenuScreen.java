@@ -11,12 +11,13 @@ public class MainMenuScreen implements Screen {
 	private Array<GElement> buttons = new Array<GElement>();
 	
 	private GButton startButton, quitButton, optionsButton;
+	private GSlider slider;
 	
 	private Sprite arrow;
 	
 	public MainMenuScreen()
 	{
-		startButton = new GButton(SASUS.viewport.getScreenWidth()/2 - 200/2, SASUS.viewport.getScreenHeight()/2- 50/2,
+		startButton = new GButton(SASUS.viewport.getScreenWidth()/2 - 200/2, SASUS.viewport.getScreenHeight()/2 - 50/2,
 								200, 50, "interface/New_Game");
 		buttons.add(startButton);
 		
@@ -27,6 +28,8 @@ public class MainMenuScreen implements Screen {
 		quitButton = new GButton((int)startButton.getX(), (int)optionsButton.getY() - 50/2 - 30,
 								200, 50, "interface/Quit");
 		buttons.add(quitButton);
+		
+		slider = new GSlider(SASUS.viewport.getScreenWidth()/2 - 300/2, SASUS.viewport.getScreenHeight()/2 + 50/2);
 		
 		arrow = new Sprite(Resources.getImage("interface/Arrow"));
 		arrow.setX(startButton.getX() - 25 - 20);
@@ -57,7 +60,8 @@ public class MainMenuScreen implements Screen {
 					arrow.setY(((GButton) current).getY() + 25/2 + 5);
 			}
 		}
-		
+		slider.update();
+		slider.draw();
 		arrow.draw(SASUS.batch);
 		SASUS.batch.end();
 		
