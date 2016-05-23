@@ -91,6 +91,7 @@ public class GButton extends GElement
 						Vector2 pos = SASUS.viewport.unproject(new Vector2(Gdx.input.getX(), Gdx.input.getY()));
 						if (rect.contains(pos))
 						{
+							Resources.playSound("ui/confirm");
 							currentFinger = i;
 							break;
 						}

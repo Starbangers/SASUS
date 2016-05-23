@@ -1,3 +1,5 @@
 vox/initComplete
 vox/countdown
 vox/stageComplete
+ui/select
+ui/confirm

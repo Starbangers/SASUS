@@ -136,7 +136,7 @@ public class Resources {
 		return textures.get("null");
 	}
 
-	/*static void playSound(String name) {
+	static void playSound(String name) {
 		sounds.get(name).play(Settings.soundVolume / (float) 100);
-	}*/
+	}
 }
