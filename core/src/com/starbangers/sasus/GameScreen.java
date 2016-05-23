@@ -38,7 +38,7 @@ public class GameScreen implements Screen {
 		SASUS.shapeRenderer.begin(ShapeType.Filled);
 		
 		for(Vector2 star : CurGame.stars) {
-			SASUS.shapeRenderer.circle(star.x, star.y, (float) (Math.random()*3));
+			SASUS.shapeRenderer.circle(star.x, star.y, (float) (2+Math.random()));
 		}
 		
 		SASUS.shapeRenderer.end();
