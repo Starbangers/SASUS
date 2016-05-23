@@ -41,6 +41,22 @@ public class GButton extends GElement
 		return justReleased;
 	}
 	
+	public boolean isPointedAt()
+	{
+		Vector2 pos = SASUS.viewport.unproject(new Vector2(Gdx.input.getX(), Gdx.input.getY()));
+		return rect.contains(pos);
+	}
+	
+	public float getX()
+	{
+		return rect.x;
+	}
+	
+	public float getY()
+	{
+		return rect.y;
+	}
+	
 	@Override
 	public void update()
 	{

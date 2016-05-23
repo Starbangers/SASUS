@@ -1,4 +1,6 @@
 butt
 interface/New_Game
+interface/Quit
+interface/Arrow
 player/ref
 null
