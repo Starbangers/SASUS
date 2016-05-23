@@ -14,21 +14,19 @@ public class GSlider extends GElement
 	private int value;
 	private boolean selected;
 	
-	
-	
 	GSlider(int _x, int _y)
 	{
 		rect = new Rectangle(_x, _y, 300, 50);
 		
 		sliderScale = new Sprite(Resources.getImage("interface/SliderScale"));
-		sliderScale.setX(_x);
-		sliderScale.setY(_y);
+		sliderScale.setX(rect.x);
+		sliderScale.setY(rect.y);
 		
 		sliderSlide = new Sprite(Resources.getImage("interface/SliderSlide"));
-		sliderSlide.setX(_x + 18/2);
-		sliderSlide.setY(_y);
+		sliderSlide.setX(rect.x + rect.width/2 - 18/2);
+		sliderSlide.setY(rect.y);
 		
-		value = 0;
+		value = 50;
 		selected = false;
 	}
 	
@@ -55,7 +53,7 @@ public class GSlider extends GElement
 			if (pos.x < rect.x)
 			{
 				value = 0;
-				sliderSlide.setX(rect.x + 18/2);
+				sliderSlide.setX(rect.x - 18/2);
 			}
 			else if (pos.x > rect.x + rect.width)
 			{
@@ -64,8 +62,8 @@ public class GSlider extends GElement
 			}
 			else
 			{
-				value = ((int)(pos.x) * 100)/((int)(rect.x + rect.width));
-				sliderSlide.setX(pos.x);
+				value = ((int)(pos.x - rect.x) * 100)/((int)(rect.width));
+				sliderSlide.setX(pos.x - 18/2);
 			}
 		}
 		else
