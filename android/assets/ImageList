@@ -1,5 +1,6 @@
 butt
 interface/New_Game
+interface/Options
 interface/Quit
 interface/Arrow
 player/ref

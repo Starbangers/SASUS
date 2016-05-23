@@ -10,7 +10,7 @@ public class MainMenuScreen implements Screen {
 	
 	private Array<GElement> buttons = new Array<GElement>();
 	
-	private GButton startButton, quitButton;
+	private GButton startButton, quitButton, optionsButton;
 	
 	private Sprite arrow;
 	
@@ -20,7 +20,11 @@ public class MainMenuScreen implements Screen {
 								200, 50, "interface/New_Game");
 		buttons.add(startButton);
 		
-		quitButton = new GButton((int)startButton.getX(), (int)startButton.getY() - 50/2 - 30,
+		optionsButton = new GButton((int)startButton.getX(), (int)startButton.getY() - 50/2 - 30,
+								200, 50, "interface/Options");
+		buttons.add(optionsButton);
+		
+		quitButton = new GButton((int)startButton.getX(), (int)optionsButton.getY() - 50/2 - 30,
 								200, 50, "interface/Quit");
 		buttons.add(quitButton);
 		
