@@ -9,14 +9,16 @@ import com.badlogic.gdx.math.Vector2;
 public class GButton
 {
 	public Rectangle rect;
-	public Sprite sprite;
 	public boolean isPressed;
+	private Sprite sprite;
+	private int currentFinger;
 	
 	public GButton(int _x, int _y, int _w, int _h, String _textureId)
 	{
 		rect = new Rectangle(_x, _y, _w, _h);
 		sprite = new Sprite(Resources.getImage(_textureId), _x, _y, _w, _h);
 		isPressed = false;
+		currentFinger = -1;
 	}
 	
 	public void draw()
@@ -33,21 +35,42 @@ public class GButton
 	
 	public void update()
 	{
-		isPressed = false;
-		
 		final int FINGERS = 4;
 		
-		for (int i = 0; i < FINGERS; i++)
+		if (isPressed)
 		{
-			if (Gdx.input.isTouched(i))
+			if (Gdx.input.isTouched(currentFinger))
 			{
 				Vector2 pos = SASUS.viewport.unproject(new Vector2(Gdx.input.getX(), Gdx.input.getY()));
-				if (rect.contains(pos))
+				if (!rect.contains(pos))
 				{
-					isPressed = true;
-					return;
+					currentFinger = -1;
+					isPressed = false;
 				}
 			}
+			else
+			{
+				currentFinger = -1;
+				isPressed = false;
+			}
+		}
+		else
+		{
+			for (int i = 0; i < FINGERS; i++)
+			{
+				if (Gdx.input.isTouched(i))
+				{
+					Vector2 pos = SASUS.viewport.unproject(new Vector2(Gdx.input.getX(), Gdx.input.getY()));
+					if (rect.contains(pos))
+					{
+						currentFinger = i;
+						isPressed = true;
+						return;
+					}
+				}
+			}
+			
+			isPressed = false;
 		}
 	}
 }
