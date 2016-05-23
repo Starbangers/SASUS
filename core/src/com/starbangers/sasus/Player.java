@@ -27,10 +27,10 @@ public class Player {
 		
 		x += (goalX - x)*deltaT*3;
 		
-		if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+		if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) && goalX < 736) {
 			goalX += BASE_SPEED*deltaT;
 		}
-		if(Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+		if(Gdx.input.isKeyPressed(Input.Keys.LEFT) && goalX > 0) {
 			goalX -= BASE_SPEED*deltaT;
 		}
 	}
