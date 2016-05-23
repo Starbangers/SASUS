@@ -61,9 +61,9 @@ public class MainMenuScreen implements Screen {
 		{			
 			GameManager.beginGame();
 		}
-		else if (quitButton.isJustReleased())
+		if (quitButton.isJustReleased())
 		{
-			
+			Gdx.app.exit();
 		}
 	}
 	
