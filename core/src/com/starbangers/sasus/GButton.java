@@ -23,10 +23,9 @@ public class GButton
 	{
 		if (isPressed)
 		{
-			Color color = sprite.getColor();
 			sprite.setColor(Color.GRAY);
 			sprite.draw(SASUS.batch);
-			sprite.setColor(color);
+			sprite.setColor(Color.WHITE);
 		}
 		else
 			SASUS.batch.draw(sprite.getTexture(), rect.x, rect.y);
@@ -38,7 +37,6 @@ public class GButton
 		
 		final int fingers = 4;
 		
-		outerloop:
 		for (int i = 0; i < fingers; i++)
 		{
 			if (Gdx.input.isTouched(i))
@@ -47,7 +45,7 @@ public class GButton
 				if (rect.contains(pos))
 				{
 					isPressed = true;
-					break outerloop;
+					return;
 				}
 			}
 		}

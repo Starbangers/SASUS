@@ -1,7 +1,5 @@
 package com.starbangers.sasus;
 
-import java.util.Iterator;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
@@ -11,10 +9,15 @@ public class MainMenuScreen implements Screen {
 	
 	private Array<GButton> buttons = new Array<GButton>();
 	
+	public MainMenuScreen()
+	{
+		buttons.add(new GButton(0, 0, 100, 100, "butt"));
+	}
+	
 	@Override
 	public void show()
 	{
-		buttons.add(new GButton(0, 0, 100, 100, "butt"));
+		
 	}
 
 	@Override
@@ -25,10 +28,8 @@ public class MainMenuScreen implements Screen {
 		SASUS.camera.update();
 		SASUS.batch.setProjectionMatrix(SASUS.camera.combined);
 		SASUS.batch.begin();
-		Iterator<GButton> it = buttons.iterator();
-		while (it.hasNext())
+		for (GButton current : buttons)
 		{
-			GButton current = it.next();
 			current.update();
 			current.draw();
 		}
