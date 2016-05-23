@@ -9,7 +9,6 @@ import com.badlogic.gdx.math.Vector2;
 public class GButton extends GElement
 {
 	public Rectangle rect;
-	public boolean isPressed;
 	private Sprite sprite;
 	private int currentFinger;
 	
@@ -17,13 +16,12 @@ public class GButton extends GElement
 	{
 		rect = new Rectangle(_x, _y, _w, _h);
 		sprite = new Sprite(Resources.getImage(_textureId), _x, _y, _w, _h);
-		isPressed = false;
 		currentFinger = -1;
 	}
 	@Override
 	public void draw()
 	{
-		if (isPressed)
+		if (currentFinger != -1)
 		{
 			sprite.setColor(Color.GRAY);
 			sprite.draw(SASUS.batch);
@@ -32,12 +30,15 @@ public class GButton extends GElement
 		else
 			SASUS.batch.draw(sprite.getTexture(), rect.x, rect.y);
 	}
+	public boolean isPressed() {
+		return currentFinger != -1;
+	}
 	@Override
 	public void update()
 	{
 		final int FINGERS = 4;
 		
-		if (isPressed)
+		if (currentFinger != -1)
 		{
 			if (Gdx.input.isTouched(currentFinger))
 			{
@@ -45,13 +46,11 @@ public class GButton extends GElement
 				if (!rect.contains(pos))
 				{
 					currentFinger = -1;
-					isPressed = false;
 				}
 			}
 			else
 			{
 				currentFinger = -1;
-				isPressed = false;
 			}
 		}
 		else
@@ -64,13 +63,11 @@ public class GButton extends GElement
 					if (rect.contains(pos))
 					{
 						currentFinger = i;
-						isPressed = true;
 						return;
 					}
 				}
 			}
 			
-			isPressed = false;
 		}
 	}
 }
