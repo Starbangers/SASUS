@@ -26,7 +26,7 @@ public class MainMenuScreen implements Screen {
 		
 		arrow = new Sprite(Resources.getImage("interface/Arrow"));
 		arrow.setX(startButton.getX() - 25 - 20);
-		arrow.setY(startButton.getY() + 25/2);
+		arrow.setY(startButton.getY() + 25/2 + 5);
 	}
 	
 	@Override
@@ -50,7 +50,7 @@ public class MainMenuScreen implements Screen {
 			if (current instanceof GButton)
 			{
 				if (((GButton) current).isPointedAt())
-					arrow.setY(((GButton) current).getY() + 25/2);
+					arrow.setY(((GButton) current).getY() + 25/2 + 5);
 			}
 		}
 		
