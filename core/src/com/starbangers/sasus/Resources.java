@@ -84,7 +84,8 @@ public class Resources {
 		if(status == 3){
 			if(i >= soundlist.length) {
 				i = 0;
-				status = 4;
+				status = 5;
+				loadStep = "Finalizing...";
 				return;
 			}
 			String soundname = soundlist[i];
@@ -97,6 +98,10 @@ public class Resources {
 				Gdx.app.error("Resources", "Failed loading " + soundname);
 			}
 			i++;
+			return;
+		}
+		if(status == 5) {
+			status = 6;
 			return;
 		}
 		/*
@@ -120,7 +125,7 @@ public class Resources {
 		}
 		status = 111;
 		sounds.get("vox/initComplete").play();
-		
+		status = 4;
 	}
 
 	public static Texture getImage(String name) {
