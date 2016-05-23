@@ -20,7 +20,7 @@ public class MainMenuScreen implements Screen {
 								200, 50, "interface/New_Game");
 		buttons.add(startButton);
 		
-		quitButton = new GButton(SASUS.viewport.getScreenWidth()/2 - 200/2, SASUS.viewport.getScreenHeight()/2- 50/2 - 50/2 - 10,
+		quitButton = new GButton(SASUS.viewport.getScreenWidth()/2 - 200/2, SASUS.viewport.getScreenHeight()/2- 50/2 - 50/2 - 30,
 								200, 50, "interface/Quit");
 		buttons.add(quitButton);
 		
