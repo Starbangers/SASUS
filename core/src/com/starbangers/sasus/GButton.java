@@ -35,7 +35,7 @@ public class GButton extends GElement
 	}
 	@Override
 	public void update()
-	{
+	{		
 		final int FINGERS = 4;
 		
 		if (currentFinger != -1)
@@ -47,15 +47,18 @@ public class GButton extends GElement
 		}
 		else
 		{
-			for (int i = 0; i < FINGERS; i++)
+			if (Gdx.input.justTouched())
 			{
-				if (Gdx.input.isTouched(i))
+				for (int i = 0; i < FINGERS; i++)
 				{
-					Vector2 pos = SASUS.viewport.unproject(new Vector2(Gdx.input.getX(), Gdx.input.getY()));
-					if (rect.contains(pos))
+					if (Gdx.input.isTouched(i))
 					{
-						currentFinger = i;
-						break;
+						Vector2 pos = SASUS.viewport.unproject(new Vector2(Gdx.input.getX(), Gdx.input.getY()));
+						if (rect.contains(pos))
+						{
+							currentFinger = i;
+							break;
+						}
 					}
 				}
 			}
