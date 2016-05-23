@@ -12,6 +12,7 @@ public class SASUS extends Game {
 	public static SpriteBatch batch;
 	public static Viewport viewport;
 	public static OrthographicCamera camera;
+	public static SASUS gmae;
 	
 	public static BitmapFont font;
 	@Override
@@ -25,6 +26,7 @@ public class SASUS extends Game {
 		font.getData().setScale(2);
 		Resources.loadVital();
 		
+		gmae = this;
 		this.setScreen(new LoadingScreen());
 		//Resources.startLoadThread();
 	}

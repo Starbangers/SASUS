@@ -4,8 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 
-public class LoadingScreen implements Screen {
-
+public class MainMenuScreen implements Screen {
+	
 	@Override
 	public void show() {}
 
@@ -16,18 +16,8 @@ public class LoadingScreen implements Screen {
 		SASUS.camera.update();
 		SASUS.batch.setProjectionMatrix(SASUS.camera.combined);
 		
-		SASUS.batch.begin();
-		SASUS.batch.draw(Resources.getImage("splashscreen"), 0, 0);
-		SASUS.font.draw(SASUS.batch, ">"+Resources.loadStep, 0, 70);
-		SASUS.batch.end();
-		
-		if(Resources.loaded == 0) {
-			Resources.load();
-		} else if (Resources.loaded == 1) {
-			SASUS.gmae.setScreen(new MainMenuScreen());
-		}
 	}
-
+	
 	@Override
 	public void resize(int width, int height) {
 		SASUS.viewport.update(width, height);
