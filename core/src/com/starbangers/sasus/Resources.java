@@ -16,6 +16,11 @@ public class Resources {
 	public static volatile String loadStep = "Loading...";
 	public static volatile byte loaded = 0;
 	
+	static byte status = 0;
+	static String imglist[];
+	static String soundlist[];
+	static int i = 0;
+	
 	public static void startLoadThread() {
 		Thread thread = new Thread(new Runnable() {
 
@@ -32,14 +37,22 @@ public class Resources {
 		//textures.put("ERROR", new Texture(Gdx.files.internal("img/ERROR.png")));
 	}
 	public static void load() {
-
-		Gdx.app.log("Resources", "Loading image list...");
-		String imglistRaw = Gdx.files.internal("ImageList").readString();
-
-		String imglist[] = imglistRaw.split("\n");
-		Gdx.app.log("Resources", "Found " + imglist.length + " image declarations");
-
-		for (String imagename : imglist) {
+		if(status == 0){
+			Gdx.app.log("Resources", "Loading image list...");
+			String imglistRaw = Gdx.files.internal("ImageList").readString();
+			
+			imglist = imglistRaw.split("\n");
+			Gdx.app.log("Resources", "Found " + imglist.length + " image declarations");
+			status = 1;
+			return;
+		}
+		if(status == 1){
+			if(i >= imglist.length){
+				status = 2;
+				i = 0;
+				return;
+			}
+			String imagename = imglist[i];
 			imagename = imagename.trim();
 			loadStep = "Loading " + imagename;
 			try {
@@ -55,16 +68,26 @@ public class Resources {
 
 				}
 			}
+			i++;
+			return;
 		}
-
+		if(status == 2){
 		Gdx.app.log("Resources", "Loading sound list...");
 
 		String soundlistRaw = Gdx.files.internal("SoundList").readString();
 
-		String soundlist[] = soundlistRaw.split("\n");
+		soundlist = soundlistRaw.split("\n");
 		Gdx.app.log("Resources", "Found " + soundlist.length + " sound declarations");
-
-		for (String soundname : soundlist) {
+		status = 3;
+		return;
+		}
+		if(status == 3){
+			if(i >= soundlist.length) {
+				i = 0;
+				status = 4;
+				return;
+			}
+			String soundname = soundlist[i];
 			soundname = soundname.trim();
 			loadStep = "Loading " + soundname;
 			try {
@@ -72,10 +95,9 @@ public class Resources {
 				Gdx.app.log("Resources", "Loaded " + soundname);
 			} catch (Exception e) {
 				Gdx.app.error("Resources", "Failed loading " + soundname);
-				e.printStackTrace();
-				loaded = -1;
-				return;
 			}
+			i++;
+			return;
 		}
 		/*
 		Gdx.app.log("Resources", "Loading music...");
@@ -92,11 +114,11 @@ public class Resources {
 		}
 		*/
 		try {
-			Thread.sleep(100);
-		} catch (InterruptedException e) {
+			Thread.sleep(500);
+		} catch (InterruptedException e1) {
 
 		}
-		loaded = 1;
+		status = 111;
 		sounds.get("vox/initComplete").play();
 		
 	}

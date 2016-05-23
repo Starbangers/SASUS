@@ -20,11 +20,10 @@ public class LoadingScreen implements Screen {
 		SASUS.batch.draw(Resources.getImage("splashscreen"), 0, 0);
 		SASUS.font.draw(SASUS.batch, ">"+Resources.loadStep, 0, 70);
 		SASUS.batch.end();
-		
-		if(Resources.loaded == 0) {
-			Resources.load();
-		} else if (Resources.loaded == 1) {
+		if(Resources.status == 4) {
 			SASUS.gmae.setScreen(new MainMenuScreen());
+		} else {
+			Resources.load();
 		}
 	}
 
