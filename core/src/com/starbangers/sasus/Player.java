@@ -16,6 +16,8 @@ public class Player {
 	float rot = 3;
 	float goalRot = 0;
 	
+	int health = 10;
+	
 	public Player() {
 		sprite = new Sprite(Resources.getImage("player/ref"));
 		sprite.setOrigin(31.5f, 31.5f);

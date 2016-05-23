@@ -45,12 +45,31 @@ public class GameScreen implements Screen {
 		
 		SASUS.batch.begin();
 		CurGame.player.draw();
-		
+		if(!useWidescreenLayout) {
 		leftBorder.draw(SASUS.batch);
 		rightBorder.draw(SASUS.batch);
+		}
 		SASUS.batch.end();
 		
+		SASUS.shapeRenderer.setColor(Color.WHITE);
+		if(!useWidescreenLayout) {
 		
+		SASUS.shapeRenderer.begin(ShapeType.Filled);
+		
+		for(int i = 0; i < CurGame.player.health; i ++) {
+			SASUS.shapeRenderer.rect(0, 300+i*30, 50, 30);
+		}
+	
+		SASUS.shapeRenderer.end();
+		SASUS.shapeRenderer.setColor(Color.BLACK);
+		SASUS.shapeRenderer.begin(ShapeType.Line);
+	
+		for(int i = 0; i < 10; i ++) {
+			SASUS.shapeRenderer.rect(0, 300+i*30, 50, 30);
+		}
+
+		SASUS.shapeRenderer.end();
+		}
 	}
 
 	@Override
