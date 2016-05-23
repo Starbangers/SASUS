@@ -3,5 +3,6 @@ interface/New_Game
 interface/Options
 interface/Quit
 interface/Arrow
+interface/ScreenBorders
 player/ref
 null
