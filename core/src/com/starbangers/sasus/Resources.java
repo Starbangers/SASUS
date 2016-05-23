@@ -47,16 +47,13 @@ public class Resources {
 				Gdx.app.log("Resources", "Loaded " + imagename);
 			} catch (Exception e) {
 				Gdx.app.error("Resources", "Failed loading " + imagename);
-				e.printStackTrace();
-				
-				loaded = -1;
+				//e.printStackTrace();
 
 				try {
 					Thread.sleep(500);
 				} catch (InterruptedException e1) {
 
 				}
-				return;
 			}
 		}
 
@@ -108,8 +105,8 @@ public class Resources {
 		if (textures.containsKey(name)) {
 			return textures.get(name);
 		}
-		Gdx.app.error("Resources", "");
-		return null;
+		Gdx.app.error("Resources", name+" was requested, but is not loaded!");
+		return textures.get("null");
 	}
 
 	/*static void playSound(String name) {
