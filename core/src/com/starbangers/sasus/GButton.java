@@ -6,10 +6,10 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
-public class GButton
+public class GButton extends GElement
 {
 	public Rectangle rect;
-	public Sprite sprite;
+	private Sprite sprite;
 	public boolean isPressed;
 	
 	public GButton(int _x, int _y, int _w, int _h, String _textureId)
@@ -18,7 +18,7 @@ public class GButton
 		sprite = new Sprite(Resources.getImage(_textureId), _x, _y, _w, _h);
 		isPressed = false;
 	}
-	
+	@Override
 	public void draw()
 	{
 		if (isPressed)
@@ -30,7 +30,7 @@ public class GButton
 		else
 			SASUS.batch.draw(sprite.getTexture(), rect.x, rect.y);
 	}
-	
+	@Override
 	public void update()
 	{
 		isPressed = false;

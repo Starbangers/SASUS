@@ -7,7 +7,7 @@ import com.badlogic.gdx.utils.Array;
 
 public class MainMenuScreen implements Screen {
 	
-	private Array<GButton> buttons = new Array<GButton>();
+	private Array<GElement> buttons = new Array<GElement>();
 	
 	public MainMenuScreen()
 	{
@@ -28,7 +28,7 @@ public class MainMenuScreen implements Screen {
 		SASUS.camera.update();
 		SASUS.batch.setProjectionMatrix(SASUS.camera.combined);
 		SASUS.batch.begin();
-		for (GButton current : buttons)
+		for (GElement current : buttons)
 		{
 			current.update();
 			current.draw();
