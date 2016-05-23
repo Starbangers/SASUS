@@ -35,9 +35,9 @@ public class GButton
 	{
 		isPressed = false;
 		
-		final int fingers = 4;
+		final int FINGERS = 4;
 		
-		for (int i = 0; i < fingers; i++)
+		for (int i = 0; i < FINGERS; i++)
 		{
 			if (Gdx.input.isTouched(i))
 			{
