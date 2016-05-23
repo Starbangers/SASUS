@@ -11,6 +11,7 @@ public class GButton extends GElement
 	public Rectangle rect;
 	private Sprite sprite;
 	private int currentFinger;
+	private boolean justReleased;
 	
 	public GButton(int _x, int _y, int _w, int _h, String _textureId)
 	{
@@ -19,7 +20,9 @@ public class GButton extends GElement
 		sprite.setX(_x);
 		sprite.setY(_y);
 		currentFinger = -1;
+		justReleased = false;
 	}
+	
 	@Override
 	public void draw()
 	{
@@ -32,12 +35,17 @@ public class GButton extends GElement
 		else
 			SASUS.batch.draw(sprite.getTexture(), rect.x, rect.y);
 	}
-	public boolean isPressed() {
-		return currentFinger != -1;
+	
+	public boolean isJustReleased()
+	{
+		return justReleased;
 	}
+	
 	@Override
 	public void update()
-	{		
+	{
+		justReleased = false;
+		
 		final int FINGERS = 4;
 		
 		if (currentFinger != -1)
@@ -45,6 +53,7 @@ public class GButton extends GElement
 			if (!Gdx.input.isTouched(currentFinger))
 			{
 				currentFinger = -1;
+				justReleased = true;
 			}
 		}
 		else

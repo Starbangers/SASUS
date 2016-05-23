@@ -13,8 +13,8 @@ public class MainMenuScreen implements Screen {
 	
 	public MainMenuScreen()
 	{
-		startButton = new GButton(SASUS.viewport.getScreenWidth()/2 - 100/2, SASUS.viewport.getScreenHeight()/2- 100/2,
-								100, 100, "butt");
+		startButton = new GButton(SASUS.viewport.getScreenWidth()/2 - 200/2, SASUS.viewport.getScreenHeight()/2- 50/2,
+								200, 50, "interface/New_Game");
 		buttons.add(startButton);
 	}
 	
@@ -39,7 +39,7 @@ public class MainMenuScreen implements Screen {
 		}
 		SASUS.batch.end();
 		
-		if(startButton.isPressed()) {
+		if(startButton.isJustReleased()) {			
 			GameManager.beginGame();
 		}
 	}
