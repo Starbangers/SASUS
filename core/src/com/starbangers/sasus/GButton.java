@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
-public class GButton
+public class GButton extends GElement
 {
 	public Rectangle rect;
 	public boolean isPressed;
@@ -20,7 +20,7 @@ public class GButton
 		isPressed = false;
 		currentFinger = -1;
 	}
-	
+	@Override
 	public void draw()
 	{
 		if (isPressed)
@@ -32,7 +32,7 @@ public class GButton
 		else
 			SASUS.batch.draw(sprite.getTexture(), rect.x, rect.y);
 	}
-	
+	@Override
 	public void update()
 	{
 		final int FINGERS = 4;
