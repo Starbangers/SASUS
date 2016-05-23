@@ -63,11 +63,10 @@ public class GButton extends GElement
 					if (rect.contains(pos))
 					{
 						currentFinger = i;
-						return;
+						break;
 					}
 				}
 			}
-			
 		}
 	}
 }
