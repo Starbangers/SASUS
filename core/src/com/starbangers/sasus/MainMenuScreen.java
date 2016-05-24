@@ -14,7 +14,7 @@ public class MainMenuScreen implements Screen {
 	private GSlider slider;
 	
 	private Sprite arrow;
-	private float prevArrowPos = 0;
+	//private float prevArrowPos = 0;
 	
 	public MainMenuScreen()
 	{
@@ -74,8 +74,7 @@ public class MainMenuScreen implements Screen {
 					arrow.setY(((GButton) current).getY() + 25/2 + 5);
 			}
 		}
-		slider.update();
-		slider.draw();
+		
 		arrow.draw(SASUS.batch);
 		SASUS.batch.end();
 		
@@ -130,6 +129,7 @@ public class MainMenuScreen implements Screen {
 		switch (_state)
 		{
 		case OptionsState:
+			elements.add(slider);
 			elements.add(backButton);
 			break;
 		case MainState: //fall through to default
