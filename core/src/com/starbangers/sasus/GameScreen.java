@@ -14,12 +14,13 @@ public class GameScreen implements Screen {
 	public static Sprite leftBorder;
 	public static Sprite rightBorder;
 	
+	
 	//public static final Color Transparend
 	
 	public GameScreen() {
 		leftBorder = new Sprite(Resources.getImage("interface/ScreenBorders"));
 		rightBorder = new Sprite(Resources.getImage("interface/ScreenBorders"));
-		leftBorder.setPosition(-64, 0);
+		leftBorder.setPosition(-128, 0);
 		rightBorder.setPosition(800, 0);
 	}
 	
@@ -28,6 +29,11 @@ public class GameScreen implements Screen {
 
 	@Override
 	public void render(float deltaT) {
+		float XTension = (SASUS.viewport.getWorldWidth() - 800) / 2;
+		
+		useWidescreenLayout = XTension >= 64;
+		float HPpos = useWidescreenLayout ? -64 : -XTension;
+		
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		SASUS.camera.update();
@@ -47,9 +53,11 @@ public class GameScreen implements Screen {
 		
 		SASUS.batch.begin();
 		CurGame.player.draw();
-		if(!useWidescreenLayout) {
-		leftBorder.draw(SASUS.batch);
-		rightBorder.draw(SASUS.batch);
+		if(useWidescreenLayout) {
+			leftBorder.draw(SASUS.batch);
+			rightBorder.draw(SASUS.batch);
+		} else {
+			SASUS.batch.draw(Resources.getImage("HUD/leftHUD"), -XTension, 0);
 		}
 		
 		
@@ -57,24 +65,20 @@ public class GameScreen implements Screen {
 		SASUS.batch.end();
 		
 		SASUS.shapeRenderer.setColor(Color.WHITE);
-		if(!useWidescreenLayout) {
 		
 		SASUS.shapeRenderer.begin(ShapeType.Filled);
 		
 		for(int i = 0; i < CurGame.player.health; i ++) {
-			SASUS.shapeRenderer.rect(0, 280+i*32, 64, 32);
+			SASUS.shapeRenderer.rect(HPpos, 280+i*32, 60, 32);
 		}
 	
 		SASUS.shapeRenderer.end();
 		
 		SASUS.batch.begin();
 		for(int i = 0; i < 10; i ++) {
-			SASUS.batch.draw(Resources.getImage("HUD/hpBar"), 0, 280+i*32);
+			SASUS.batch.draw(Resources.getImage("HUD/hpBar"), HPpos, 280+i*32);
 		}
 		SASUS.batch.end();
-		
-
-		}
 	}
 
 	@Override
