@@ -7,7 +7,7 @@ import com.badlogic.gdx.math.Vector2;
 
 public class GSlider extends GElement
 {
-	private Rectangle rect;
+	private Rectangle scaleRect, slideRect;
 	private Sprite sliderScale;
 	private Sprite sliderSlide;
 	
@@ -16,31 +16,33 @@ public class GSlider extends GElement
 	
 	GSlider(int _x, int _y, int _value)
 	{
-		rect = new Rectangle(_x, _y, 300, 50);
+		scaleRect = new Rectangle(_x, _y, 300, 50);
 		
 		sliderScale = new Sprite(Resources.getImage("interface/SliderScale"));
-		sliderScale.setX(rect.x);
-		sliderScale.setY(rect.y);
+		sliderScale.setX(scaleRect.x);
+		sliderScale.setY(scaleRect.y);
 		
 		sliderSlide = new Sprite(Resources.getImage("interface/SliderSlide"));
 		
 		if (_value < 0)
 		{
-			sliderSlide.setX(rect.x - 18/2);
+			sliderSlide.setX(scaleRect.x - 18/2);
 			value = 0;
 		}
 		else if (_value > 100)
 		{
-			sliderSlide.setX(rect.x + rect.width - 18/2);
+			sliderSlide.setX(scaleRect.x + scaleRect.width - 18/2);
 			value = 100;
 		}
 		else
 		{
-			sliderSlide.setX(_value * rect.width / 100 + rect.x - 18/2);
+			sliderSlide.setX(_value * scaleRect.width / 100 + scaleRect.x - 18/2);
 			value = _value;
 		}
 		
-		sliderSlide.setY(rect.y);
+		sliderSlide.setY(scaleRect.y);
+		
+		slideRect = new Rectangle(sliderSlide.getX(), sliderSlide.getY(), 18, 50);
 		
 		selected = false;
 	}
@@ -60,32 +62,39 @@ public class GSlider extends GElement
 	@Override
 	public void update() 
 	{
-		if (Gdx.input.isTouched())
+		Vector2 pos;
+		
+		if(Gdx.input.justTouched())
 		{
-			Vector2 pos = SASUS.viewport.unproject(new Vector2(Gdx.input.getX(), Gdx.input.getY()));
-			if (!selected && rect.contains(pos))
+			pos = SASUS.viewport.unproject(new Vector2(Gdx.input.getX(), Gdx.input.getY()));
+			
+			if (scaleRect.contains(pos) || slideRect.contains(pos))
 				selected = true;
-			if(selected)
+		}
+		
+		if(Gdx.input.isTouched() && selected)
+		{
+			pos = SASUS.viewport.unproject(new Vector2(Gdx.input.getX(), Gdx.input.getY()));
+			
+			if (pos.x < scaleRect.x)
 			{
-				if (pos.x < rect.x)
-				{
-					value = 0;
-					sliderSlide.setX(rect.x - 18/2);
-				}
-				else if (pos.x > rect.x + rect.width)
-				{
-					value = 100;
-					sliderSlide.setX(rect.x + rect.width - 18/2);
-				}
-				else
-				{
-					value = ((int)(pos.x - rect.x) * 100)/((int)(rect.width));
-					sliderSlide.setX(pos.x - 18/2);
-				}
+				value = 0;
+				sliderSlide.setX(scaleRect.x - 18/2);
 			}
+			else if (pos.x > scaleRect.x + scaleRect.width)
+			{
+				value = 100;
+				sliderSlide.setX(scaleRect.x + scaleRect.width - 18/2);
+			}
+			else
+			{
+				value = ((int)(pos.x - scaleRect.x) * 100)/((int)(scaleRect.width));
+				sliderSlide.setX(pos.x - 18/2);
+			}
+				
+			slideRect.setX(sliderSlide.getX());
 		}
 		else
 			selected = false;
 	}
-
 }

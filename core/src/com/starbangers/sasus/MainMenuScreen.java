@@ -11,7 +11,7 @@ public class MainMenuScreen implements Screen {
 	private Array<GElement> elements = new Array<GElement>();
 	
 	private GButton startButton, quitButton, optionsButton, creditsButton, backButton;
-	private GSlider musicSlider;
+	private GSlider musicSlider, soundSlider;
 	private GImage creditsText;
 	
 	private Sprite arrow;
@@ -21,6 +21,7 @@ public class MainMenuScreen implements Screen {
 	{
 		startButton = new GButton(800/2 - 200/2, 600/2 - 50/2,
 								200, 50, "interface/New_Game");		
+		
 		optionsButton = new GButton((int)startButton.getX(), (int)startButton.getY() - 50/2 - 30,
 								200, 50, "interface/Options");
 		
@@ -36,6 +37,7 @@ public class MainMenuScreen implements Screen {
 		creditsText = new GImage(800/2 - 600/2, 600/2 - 180/2 + 100, "interface/CreditsText");
 		
 		musicSlider = new GSlider(800/2 - 300/2, 600/2 + 50/2, (int)Settings.musicVolume);
+		soundSlider = new GSlider(800/2 - 300/2, 600/2 + 50/2 - 70, (int)Settings.soundVolume);
 		
 		arrow = new Sprite(Resources.getImage("interface/Arrow"));
 		arrow.setX(startButton.getX() - 25 - 20);
@@ -71,6 +73,12 @@ public class MainMenuScreen implements Screen {
 		{
 			if(!(current instanceof GImage))
 				current.update();
+			
+			Settings.musicVolume = musicSlider.getValue();
+			Resources.updateMusicVolume();
+			
+			Settings.soundVolume = soundSlider.getValue();
+			
 			current.draw();
 			if (current instanceof GButton)
 			{
@@ -145,6 +153,7 @@ public class MainMenuScreen implements Screen {
 			break;
 		case OptionsState:
 			elements.add(musicSlider);
+			elements.add(soundSlider);
 			elements.add(backButton);
 			break;
 		case MainState: //fall through to default
