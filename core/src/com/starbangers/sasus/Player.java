@@ -42,4 +42,13 @@ public class Player {
 		sprite.setRotation((float) Math.toDegrees(rot));
 		sprite.draw(SASUS.batch);
 	}
+	
+	public void drawShapes() {
+		SASUS.shapeRenderer.setColor(0, 0.5f, 1f, 0.2f);
+		
+		for(int i = 0; i < 3; i++) {
+			SASUS.shapeRenderer.circle(x+31.5f+(float)Math.cos(rot+Math.PI/2)*31.5f, y+(float)Math.sin(rot+Math.PI/2)*41.5f, i*10);
+		}
+		
+	}
 }
