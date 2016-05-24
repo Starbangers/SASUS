@@ -33,7 +33,7 @@ public class CurGame {
 		}
 		for (Vector2 star : stars)
 		{
-			star.y -= 300 * deltaT;
+			star.y -= 150 * deltaT;
 			if (star.y <= 0)
 				star.set((float)Math.random() * 800, 600);
 		}
