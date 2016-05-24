@@ -69,8 +69,7 @@ public class MainMenuScreen implements Screen {
 		SASUS.batch.begin();
 		for (GElement current : elements)
 		{
-			if (!(current instanceof GImage))
-				current.update();
+			current.update();
 			current.draw();
 			if (current instanceof GButton)
 			{

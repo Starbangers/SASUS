@@ -34,6 +34,11 @@ public class Resources {
 		status = 0;
 		i = 0;
 	}
+	public static void updateMusicVolume() {
+		for(String sik : music.keySet()) {
+			music.get(sik).setVolume(Settings.musicVolume/(float)100);
+		}
+	}
 	public static void load() {
 		if(status == 0){
 			Gdx.app.log("Resources", "Loading image list...");
