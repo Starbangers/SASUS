@@ -12,6 +12,7 @@ public class MainMenuScreen implements Screen {
 	
 	private GButton startButton, quitButton, optionsButton, creditsButton, backButton;
 	private GSlider slider;
+	private GImage creditsText;
 	
 	private Sprite arrow;
 	//private float prevArrowPos = 0;
@@ -29,8 +30,10 @@ public class MainMenuScreen implements Screen {
 		quitButton = new GButton((int)startButton.getX(), (int)creditsButton.getY() - 50/2 - 30,
 				200, 50, "interface/Quit");
 		
-		backButton = new GButton(800/2 - 200/2, 600/2 - 50/2,
+		backButton = new GButton(800/2 - 200/2, 600/2 - 50/2 - 200,
 				200, 50, "interface/Back");
+		
+		creditsText = new GImage(800/2 - 600/2, 600/2 - 180/2 + 100, "interface/CreditsText");
 		
 		slider = new GSlider(800/2 - 300/2, 600/2 + 50/2, 34);
 		
@@ -66,7 +69,8 @@ public class MainMenuScreen implements Screen {
 		SASUS.batch.begin();
 		for (GElement current : elements)
 		{
-			current.update();
+			if (!(current instanceof GImage))
+				current.update();
 			current.draw();
 			if (current instanceof GButton)
 			{
@@ -85,15 +89,19 @@ public class MainMenuScreen implements Screen {
 		{			
 			GameManager.beginGame();
 		}
-		if (optionsButton.isJustReleased())
+		else if (optionsButton.isJustReleased())
 		{
 			setState(State.OptionsState);
 		}
-		if (quitButton.isJustReleased())
+		else if (creditsButton.isJustReleased())
+		{
+			setState(State.CreditsState);
+		}
+		else if (quitButton.isJustReleased())
 		{
 			Gdx.app.exit();
 		}
-		if (backButton.isJustReleased())
+		else if (backButton.isJustReleased())
 		{
 			setState(State.MainState);
 		}
@@ -131,6 +139,10 @@ public class MainMenuScreen implements Screen {
 		elements.clear();
 		switch (_state)
 		{
+		case CreditsState:
+			elements.add(creditsText);
+			elements.add(backButton);
+			break;
 		case OptionsState:
 			elements.add(slider);
 			elements.add(backButton);
