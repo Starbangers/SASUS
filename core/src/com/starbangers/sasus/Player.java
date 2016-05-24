@@ -42,7 +42,7 @@ public class Player {
 		
 		float speedX = Math.abs(goalX - x);
 		
-		Resources.sounds.get("ship/engine_active_loop").setVolume(engineSoundID, speedX/20);
+		Resources.sounds.get("ship/engine_active_loop").setVolume(engineSoundID, speedX/40+0.2f);
 		//Resources.sounds.get("ship/engine_active_loop").setPitch(engineSoundID, speedX/10);
 		
 		if((GameScreen.right_button.isPressed() || Gdx.input.isKeyPressed(Input.Keys.RIGHT)) && goalX < 736) {
@@ -56,7 +56,7 @@ public class Player {
 			Resources.playSound("weapon/laser"+(int)(Math.random()*3+1));
 			for(int i = 0; i < 5; i ++)
 			CurGame.particles.add(new Particle(x+31.5f+(float)Math.cos(rot+Math.PI/2)*30, y+31.5f+(float)Math.sin(rot+Math.PI/2)*30, (float)Math.random()*80-40, (float)Math.random()*80-40, 4, 4, 0, 0.6f, 1));
-			CurGame.entities.add(new Projectile(x+31.5f+(float)Math.cos(rot+Math.PI/2)*25, y+31.5f+(float)Math.sin(rot+Math.PI/2)*25, (float)Math.cos(rot+Math.PI/2)*600, (float)Math.sin(rot+Math.PI/2)*600, 0, 0.6f, 1, 8, true, 1));
+			CurGame.entities.add(new Projectile(x+31.5f+(float)Math.cos(rot+Math.PI/2)*25, y+31.5f+(float)Math.sin(rot+Math.PI/2)*25, (float)Math.cos(rot+Math.PI/2)*600+velX, (float)Math.sin(rot+Math.PI/2)*600+velY, 0, 0.6f, 1, 8, true, 1));
 		}
 		
 		
