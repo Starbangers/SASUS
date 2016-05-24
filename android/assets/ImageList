@@ -17,4 +17,5 @@ interface/control_fire
 HUD/hpBar
 HUD/leftHUD
 player/ref
+enemies/tiny
 null

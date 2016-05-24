@@ -18,6 +18,8 @@ public class Player {
 	
 	float gunCD = 0;
 	
+	long engineSoundID;
+	
 	int health = 10;
 	
 	float particleTime = 0;
@@ -25,6 +27,8 @@ public class Player {
 	public Player() {
 		sprite = new Sprite(Resources.getImage("player/ref"));
 		sprite.setOrigin(31.5f, 31.5f);
+		engineSoundID = Resources.sounds.get("ship/engine_active_loop").play();
+		Resources.sounds.get("ship/engine_active_loop").setLooping(engineSoundID, true);
 	}
 	
 	public void update(float deltaT) {
@@ -38,17 +42,20 @@ public class Player {
 		
 		float speedX = Math.abs(goalX - x);
 		
+		Resources.sounds.get("ship/engine_active_loop").setVolume(engineSoundID, speedX/20);
+		//Resources.sounds.get("ship/engine_active_loop").setPitch(engineSoundID, speedX/10);
+		
 		if((GameScreen.right_button.isPressed() || Gdx.input.isKeyPressed(Input.Keys.RIGHT)) && goalX < 736) {
 			goalX += BASE_SPEED*deltaT;
 		}
 		if((GameScreen.left_button.isPressed() || Gdx.input.isKeyPressed(Input.Keys.LEFT)) && goalX > 0) {
 			goalX -= BASE_SPEED*deltaT;
 		}
-		if(Gdx.input.isKeyPressed(Input.Keys.UP) && gunCD < 0) {
+		if(Gdx.input.isKeyPressed(Input.Keys.CONTROL_LEFT) && gunCD < 0) {
 			gunCD = 1;
 			Resources.playSound("weapon/laser"+(int)(Math.random()*3+1));
 			for(int i = 0; i < 5; i ++)
-			CurGame.particles.add(new Particle(x+31.5f+(float)Math.cos(rot+Math.PI/2)*30, y+31.5f+(float)Math.sin(rot+Math.PI/2)*30, (float)Math.random()*80-40, (float)Math.random()*80-40, 4, 8, 0, 0.6f, 1));
+			CurGame.particles.add(new Particle(x+31.5f+(float)Math.cos(rot+Math.PI/2)*30, y+31.5f+(float)Math.sin(rot+Math.PI/2)*30, (float)Math.random()*80-40, (float)Math.random()*80-40, 4, 4, 0, 0.6f, 1));
 			CurGame.entities.add(new Projectile(x+31.5f+(float)Math.cos(rot+Math.PI/2)*25, y+31.5f+(float)Math.sin(rot+Math.PI/2)*25, (float)Math.cos(rot+Math.PI/2)*600, (float)Math.sin(rot+Math.PI/2)*600, 0, 0.6f, 1, 8, true, 1));
 		}
 		
