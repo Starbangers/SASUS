@@ -38,6 +38,13 @@ public class Resources {
 		textures.put("splashscreen", new Texture(Gdx.files.internal("img/Logo.png")));
 		//textures.put("ERROR", new Texture(Gdx.files.internal("img/ERROR.png")));
 	}
+	public static void reset() {
+		textures.clear();
+		sounds.clear();
+		music.clear();
+		status = 0;
+		i = 0;
+	}
 	public static void load() {
 		if(status == 0){
 			Gdx.app.log("Resources", "Loading image list...");

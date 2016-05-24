@@ -27,6 +27,7 @@ public class SASUS extends Game {
 		batch = new SpriteBatch();
 		shapeRenderer = new ShapeRenderer();
 		font.getData().setScale(2);
+		Resources.reset();
 		Resources.loadVital();
 		
 		gmae = this;
