@@ -47,7 +47,7 @@ public class Player {
 		SASUS.shapeRenderer.setColor(0, 0.5f, 1f, 0.1f+(float)(0.05f*Math.random()));
 		
 		for(int i = 0; i < 5; i++) {
-			SASUS.shapeRenderer.circle(x+31.5f, y+(float)Math.sin(rot+Math.PI/2)*41.5f, i*10);
+			SASUS.shapeRenderer.circle(x+31.5f+(float)Math.cos(rot+Math.PI/2)*8, y+31.5f+(float)Math.sin(rot+Math.PI/2)*8, i*10);
 		}
 		
 	}
