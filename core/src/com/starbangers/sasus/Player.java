@@ -44,10 +44,10 @@ public class Player {
 	}
 	
 	public void drawShapes() {
-		SASUS.shapeRenderer.setColor(0, 0.5f, 1f, 0.2f);
+		SASUS.shapeRenderer.setColor(0, 0.5f, 1f, 0.1f+(float)(0.05f*Math.random()));
 		
-		for(int i = 0; i < 3; i++) {
-			SASUS.shapeRenderer.circle(x+31.5f+(float)Math.cos(rot+Math.PI/2)*31.5f, y+(float)Math.sin(rot+Math.PI/2)*41.5f, i*10);
+		for(int i = 0; i < 5; i++) {
+			SASUS.shapeRenderer.circle(x+31.5f, y+(float)Math.sin(rot+Math.PI/2)*41.5f, i*10);
 		}
 		
 	}
