@@ -12,7 +12,7 @@ public class MainMenuScreen implements Screen {
 	
 	private GButton startButton, quitButton, optionsButton, creditsButton, backButton;
 	private GSlider musicSlider, soundSlider;
-	private GImage creditsText;
+	private GImage creditsText, musicText, sfxText;
 	
 	private Sprite arrow;
 	//private float prevArrowPos = 0;
@@ -34,10 +34,12 @@ public class MainMenuScreen implements Screen {
 		backButton = new GButton(800/2 - 200/2, 600/2 - 50/2 - 200,
 				200, 50, "interface/Back");
 		
-		creditsText = new GImage(800/2 - 600/2, 600/2 - 180/2 + 100, "interface/CreditsText");
+		musicSlider = new GSlider(322, 600/2 + 50/2, (int)Settings.musicVolume);
+		soundSlider = new GSlider(322, 600/2 + 50/2 - 70, (int)Settings.soundVolume);
 		
-		musicSlider = new GSlider(800/2 - 300/2, 600/2 + 50/2, (int)Settings.musicVolume);
-		soundSlider = new GSlider(800/2 - 300/2, 600/2 + 50/2 - 70, (int)Settings.soundVolume);
+		creditsText = new GImage(800/2 - 600/2, 600/2 - 180/2 + 100, "interface/CreditsText");
+		musicText = new GImage(177, musicSlider.getY() + 25/2 + 5, "interface/Music");
+		sfxText = new GImage(177, soundSlider.getY() + 25/2 + 2, "interface/SFX");
 		
 		arrow = new Sprite(Resources.getImage("interface/Arrow"));
 		arrow.setX(startButton.getX() - 25 - 20);
@@ -153,7 +155,9 @@ public class MainMenuScreen implements Screen {
 			break;
 		case OptionsState:
 			elements.add(musicSlider);
+			elements.add(musicText);
 			elements.add(soundSlider);
+			elements.add(sfxText);
 			elements.add(backButton);
 			break;
 		case MainState: //fall through to default

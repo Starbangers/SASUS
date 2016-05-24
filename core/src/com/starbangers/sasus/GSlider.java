@@ -97,4 +97,14 @@ public class GSlider extends GElement
 		else
 			selected = false;
 	}
+	
+	public int getX()
+	{
+		return (int)scaleRect.x;
+	}
+	
+	public int getY()
+	{
+		return (int)scaleRect.y;
+	}
 }

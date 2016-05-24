@@ -8,6 +8,8 @@ interface/Quit
 interface/Arrow
 interface/SliderScale
 interface/SliderSlide
+interface/Music
+interface/SFX
 interface/ScreenBorders
 interface/control_left
 interface/control_right
