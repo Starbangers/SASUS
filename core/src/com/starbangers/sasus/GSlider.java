@@ -23,10 +23,25 @@ public class GSlider extends GElement
 		sliderScale.setY(rect.y);
 		
 		sliderSlide = new Sprite(Resources.getImage("interface/SliderSlide"));
-		sliderSlide.setX(_value * rect.width / 100 + rect.x - 18/2);
+		
+		if (_value < 0)
+		{
+			sliderSlide.setX(rect.x - 18/2);
+			value = 0;
+		}
+		else if (_value > 100)
+		{
+			sliderSlide.setX(rect.x + rect.width - 18/2);
+			value = 100;
+		}
+		else
+		{
+			sliderSlide.setX(_value * rect.width / 100 + rect.x - 18/2);
+			value = _value;
+		}
+		
 		sliderSlide.setY(rect.y);
 		
-		value = _value;
 		selected = false;
 	}
 	

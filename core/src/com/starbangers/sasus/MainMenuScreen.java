@@ -32,7 +32,7 @@ public class MainMenuScreen implements Screen {
 		backButton = new GButton(800/2 - 200/2, 600/2 - 50/2,
 				200, 50, "interface/Back");
 		
-		slider = new GSlider(800/2 - 300/2, 600/2 + 50/2, 50);
+		slider = new GSlider(800/2 - 300/2, 600/2 + 50/2, 34);
 		
 		arrow = new Sprite(Resources.getImage("interface/Arrow"));
 		arrow.setX(startButton.getX() - 25 - 20);
