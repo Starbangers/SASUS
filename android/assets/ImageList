@@ -2,6 +2,7 @@ butt
 interface/New_Game
 interface/Options
 interface/Credits
+interface/Back
 interface/Quit
 interface/Arrow
 interface/SliderScale

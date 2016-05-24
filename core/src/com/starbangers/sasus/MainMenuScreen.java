@@ -10,7 +10,7 @@ public class MainMenuScreen implements Screen {
 	
 	private Array<GElement> elements = new Array<GElement>();
 	
-	private GButton startButton, quitButton, optionsButton, creditsButton;
+	private GButton startButton, quitButton, optionsButton, creditsButton, backButton;
 	private GSlider slider;
 	
 	private Sprite arrow;
@@ -19,26 +19,26 @@ public class MainMenuScreen implements Screen {
 	public MainMenuScreen()
 	{
 		startButton = new GButton(SASUS.viewport.getScreenWidth()/2 - 200/2, SASUS.viewport.getScreenHeight()/2 - 50/2,
-								200, 50, "interface/New_Game");
-		elements.add(startButton);
-		
+								200, 50, "interface/New_Game");		
 		optionsButton = new GButton((int)startButton.getX(), (int)startButton.getY() - 50/2 - 30,
 								200, 50, "interface/Options");
-		elements.add(optionsButton);
 		
 		creditsButton = new GButton((int)startButton.getX(), (int)optionsButton.getY() - 50/2 - 30,
 								200, 50, "interface/Credits");
-		elements.add(creditsButton);
 		
 		quitButton = new GButton((int)startButton.getX(), (int)creditsButton.getY() - 50/2 - 30,
 				200, 50, "interface/Quit");
-		elements.add(quitButton);
+		
+		backButton = new GButton(SASUS.viewport.getScreenWidth()/2 - 200/2, SASUS.viewport.getScreenHeight()/2 - 50/2,
+				200, 50, "interface/Back");
 		
 		slider = new GSlider(SASUS.viewport.getScreenWidth()/2 - 300/2, SASUS.viewport.getScreenHeight()/2 + 50/2);
 		
 		arrow = new Sprite(Resources.getImage("interface/Arrow"));
 		arrow.setX(startButton.getX() - 25 - 20);
 		arrow.setY(startButton.getY() + 25/2 + 5);
+		
+		setState(State.MainState);
 	}
 	
 	@Override
@@ -76,13 +76,22 @@ public class MainMenuScreen implements Screen {
 		arrow.draw(SASUS.batch);
 		SASUS.batch.end();
 		
-		if(startButton.isJustReleased())
+		if (startButton.isJustReleased())
 		{			
 			GameManager.beginGame();
+		}
+		if (optionsButton.isJustReleased())
+		{
+			System.out.println("lel");
+			setState(State.OptionsState);
 		}
 		if (quitButton.isJustReleased())
 		{
 			Gdx.app.exit();
+		}
+		if (backButton.isJustReleased())
+		{
+			setState(State.MainState);
 		}
 	}
 	
@@ -102,5 +111,42 @@ public class MainMenuScreen implements Screen {
 
 	@Override
 	public void dispose() {}
+	
+	enum State
+	{
+		MainState, CreditsState, OptionsState
+	}
+	
+	void setState(State _state)
+	{
+		for (GElement element : elements)
+		{
+			element.update(); //do a final update
+		}
+		
+		elements.clear();
+		switch (_state)
+		{
+		case OptionsState:
+			elements.add(backButton);
+			break;
+		case MainState: //fall through to default
+		default:
+			elements.add(startButton);
+			elements.add(optionsButton);
+			elements.add(creditsButton);
+			elements.add(quitButton);
+			break;
+		}
+		
+		for (GElement element : elements)
+		{
+			if (element instanceof GButton)
+			{
+				arrow.setY(((GButton)element).getY() + 25/2 + 5);
+				break;
+			}
+		}
+	}
 
 }
