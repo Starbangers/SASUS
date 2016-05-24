@@ -10,10 +10,10 @@ public class Player {
 	
 	private Sprite sprite;
 	
-	float x = 0;
+	float x = 300;
 	float goalX = 300;
 	float y = 32;
-	float rot = 3;
+	float rot = 0;
 	float goalRot = 0;
 	
 	int health = 10;
