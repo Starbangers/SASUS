@@ -23,17 +23,6 @@ public class Resources {
 	static String soundlist[];
 	static int i = 0;
 	
-	public static void startLoadThread() {
-		Thread thread = new Thread(new Runnable() {
-
-			@Override
-			public void run() {
-				load();
-			}
-			
-		}, "Resource load thread");
-		thread.start();
-	}
 	public static void loadVital() {
 		textures.put("splashscreen", new Texture(Gdx.files.internal("img/Logo.png")));
 		//textures.put("ERROR", new Texture(Gdx.files.internal("img/ERROR.png")));

@@ -23,6 +23,14 @@ public class GButton extends GElement
 		justReleased = false;
 	}
 	
+	public void setX(float x) {
+		rect.setX(x);
+		sprite.setX(x);
+	}
+	public boolean isPressed() {
+		return currentFinger != -1;
+	}
+	
 	@Override
 	public void draw()
 	{
@@ -91,7 +99,6 @@ public class GButton extends GElement
 						Vector2 pos = SASUS.viewport.unproject(new Vector2(Gdx.input.getX(), Gdx.input.getY()));
 						if (rect.contains(pos))
 						{
-							Resources.playSound("ui/confirm");
 							currentFinger = i;
 							break;
 						}

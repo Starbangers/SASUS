@@ -72,6 +72,9 @@ public class MainMenuScreen implements Screen {
 			{
 				if (((GButton) current).isPointedAt())
 					arrow.setY(((GButton) current).getY() + 25/2 + 5);
+				if(((GButton) current).isJustReleased()) {
+					Resources.playSound("ui/confirm");
+				}
 			}
 		}
 		

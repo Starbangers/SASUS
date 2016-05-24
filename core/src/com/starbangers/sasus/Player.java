@@ -35,10 +35,10 @@ public class Player {
 		
 		float speedX = Math.abs(goalX - x);
 		
-		if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) && goalX < 736) {
+		if((GameScreen.right_button.isPressed() || Gdx.input.isKeyPressed(Input.Keys.RIGHT)) && goalX < 736) {
 			goalX += BASE_SPEED*deltaT;
 		}
-		if(Gdx.input.isKeyPressed(Input.Keys.LEFT) && goalX > 0) {
+		if((GameScreen.left_button.isPressed() || Gdx.input.isKeyPressed(Input.Keys.LEFT)) && goalX > 0) {
 			goalX -= BASE_SPEED*deltaT;
 		}
 		
