@@ -3,6 +3,7 @@ package com.starbangers.sasus;
 import java.util.HashMap;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 
@@ -12,6 +13,7 @@ import com.badlogic.gdx.graphics.Texture;
 public class Resources {
 	public static HashMap<String, Texture> textures = new HashMap<String, Texture>();
 	public static HashMap<String, Sound> sounds = new HashMap<String, Sound>();
+	public static HashMap<String, Music> music = new HashMap<String, Music>();
 	
 	public static volatile String loadStep = "Loading...";
 	public static volatile byte loaded = 0;
@@ -84,8 +86,8 @@ public class Resources {
 		if(status == 3){
 			if(i >= soundlist.length) {
 				i = 0;
-				status = 5;
-				loadStep = "Finalizing...";
+				status = 4;
+				//loadStep = "Finalizing...";
 				return;
 			}
 			String soundname = soundlist[i];
@@ -100,24 +102,42 @@ public class Resources {
 			i++;
 			return;
 		}
-		if(status == 5) {
-			status = 6;
+		
+		if(status == 4){
+			Gdx.app.log("Resources", "Loading music list...");
+
+			String soundlistRaw = Gdx.files.internal("MusicList").readString();
+
+			soundlist = soundlistRaw.split("\n");
+			Gdx.app.log("Resources", "Found " + soundlist.length + " music declarations");
+			status = 5;
 			return;
 		}
-		/*
-		Gdx.app.log("Resources", "Loading music...");
-		try {
-			Music_DM = Gdx.audio.newMusic(Gdx.files.internal("sound/music/Q1R_DM.ogg"));
-			Music_Offline = Gdx.audio.newMusic(Gdx.files.internal("sound/music/Q1R_Offline.ogg"));
-			
-			Music_Offline.setLooping(true);
-			Music_DM.setLooping(true);
-		} catch (Exception e) {
-			Gdx.app.error("Resources", "Failed loading music!");
-			loaded = -1;
+		if(status == 5){
+			if(i >= soundlist.length) {
+				i = 0;
+				status = 109;
+				loadStep = "Finalizing...";
+				return;
+			}
+			String soundname = soundlist[i];
+			soundname = soundname.trim();
+			loadStep = "Loading " + soundname;
+			try {
+				music.put(soundname, Gdx.audio.newMusic(Gdx.files.internal("sound/music/" + soundname + ".ogg")));
+				Gdx.app.log("Resources", "Loaded " + soundname);
+			} catch (Exception e) {
+				Gdx.app.error("Resources", "Failed loading " + soundname);
+			}
+			i++;
 			return;
 		}
-		*/
+		
+		if(status == 109) {
+			status = 110;
+			return;
+		}
+		
 		try {
 			Thread.sleep(500);
 		} catch (InterruptedException e1) {
@@ -125,9 +145,20 @@ public class Resources {
 		}
 		status = 111;
 		sounds.get("vox/initComplete").play();
-		status = 4;
+		playMusic("sanch-escape");
 	}
-
+	
+	
+	public static void playMusic(String name) {
+		for(String musid : music.keySet()) {
+			if(musid.equals(name)) {
+				music.get(musid).setLooping(true);
+				music.get(musid).play();
+			} else {
+				music.get(musid).stop();
+			}
+		}
+	}
 	public static Texture getImage(String name) {
 		if (textures.containsKey(name)) {
 			return textures.get(name);

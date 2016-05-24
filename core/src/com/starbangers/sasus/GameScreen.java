@@ -14,6 +14,8 @@ public class GameScreen implements Screen {
 	public static Sprite leftBorder;
 	public static Sprite rightBorder;
 	
+	//public static final Color Transparend
+	
 	public GameScreen() {
 		leftBorder = new Sprite(Resources.getImage("interface/ScreenBorders"));
 		rightBorder = new Sprite(Resources.getImage("interface/ScreenBorders"));
@@ -49,6 +51,9 @@ public class GameScreen implements Screen {
 		leftBorder.draw(SASUS.batch);
 		rightBorder.draw(SASUS.batch);
 		}
+		
+		
+		
 		SASUS.batch.end();
 		
 		SASUS.shapeRenderer.setColor(Color.WHITE);
@@ -57,18 +62,18 @@ public class GameScreen implements Screen {
 		SASUS.shapeRenderer.begin(ShapeType.Filled);
 		
 		for(int i = 0; i < CurGame.player.health; i ++) {
-			SASUS.shapeRenderer.rect(0, 300+i*30, 50, 30);
+			SASUS.shapeRenderer.rect(0, 280+i*32, 64, 32);
 		}
 	
 		SASUS.shapeRenderer.end();
-		SASUS.shapeRenderer.setColor(Color.BLACK);
-		SASUS.shapeRenderer.begin(ShapeType.Line);
-	
+		
+		SASUS.batch.begin();
 		for(int i = 0; i < 10; i ++) {
-			SASUS.shapeRenderer.rect(0, 300+i*30, 50, 30);
+			SASUS.batch.draw(Resources.getImage("HUD/hpBar"), 0, 280+i*32);
 		}
+		SASUS.batch.end();
+		
 
-		SASUS.shapeRenderer.end();
 		}
 	}
 
