@@ -44,7 +44,7 @@ public class Player {
 		
 		if(particleTime > 1/(speedX+10)) {
 			particleTime = 0;
-			CurGame.particles.add(new Particle(x+31.5f+(float)Math.cos(rot+Math.PI/2)*-41, y+31.5f+(float)Math.sin(rot+Math.PI/2)*-41, (float)(Math.random()*80-40), -20 - speedX*1.5f, 8, 16, 1, 0.7f+(float)Math.random()*0.2f, 0));
+			CurGame.particles.add(new Particle(x+31.5f+(float)Math.cos(rot+Math.PI/2)*-35, y+31.5f+(float)Math.sin(rot+Math.PI/2)*-35, (float)(Math.random()*80-40), -20 - speedX*1.5f, 8, 16, 1, 0.7f+(float)Math.random()*0.2f, 0));
 		}
 	}
 	
@@ -64,7 +64,7 @@ public class Player {
 		SASUS.shapeRenderer.setColor(1, 0.8f, 0, Math.abs(goalX - x)/1000+(float)(0.1f*Math.random()));
 		
 		for(int i = 0; i < 5; i++) {
-			SASUS.shapeRenderer.circle(x+31.5f+(float)Math.cos(rot+Math.PI/2)*-41, y+31.5f+(float)Math.sin(rot+Math.PI/2)*-41, i*10);
+			SASUS.shapeRenderer.circle(x+31.5f+(float)Math.cos(rot+Math.PI/2)*-35, y+31.5f+(float)Math.sin(rot+Math.PI/2)*-35, i*10);
 		}
 	}
 }
