@@ -7,5 +7,6 @@ interface/SliderScale
 interface/SliderSlide
 interface/ScreenBorders
 HUD/hpBar
+HUD/leftHUD
 player/ref
 null
