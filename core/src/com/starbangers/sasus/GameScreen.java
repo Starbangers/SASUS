@@ -39,6 +39,8 @@ public class GameScreen implements Screen {
 		SASUS.shapeRenderer.setProjectionMatrix(SASUS.camera.combined);
 		
 		CurGame.player.update(deltaT);
+		CurGame.tick(deltaT);
+		
 		
 		SASUS.shapeRenderer.setColor(Color.WHITE);
 		SASUS.shapeRenderer.begin(ShapeType.Filled);
@@ -68,6 +70,10 @@ public class GameScreen implements Screen {
 		SASUS.shapeRenderer.begin(ShapeType.Filled);
 		
 		CurGame.player.drawShapes();
+		
+		for(Particle part : CurGame.particles) {
+			part.draw();
+		}
 		
 		SASUS.shapeRenderer.setColor(Color.WHITE);
 		for(int i = 0; i < CurGame.player.health; i ++) {
