@@ -18,7 +18,7 @@ public class MainMenuScreen implements Screen {
 	
 	public MainMenuScreen()
 	{
-		startButton = new GButton(SASUS.viewport.getScreenWidth()/2 - 200/2, SASUS.viewport.getScreenHeight()/2 - 50/2,
+		startButton = new GButton(800/2 - 200/2, 600/2 - 50/2,
 								200, 50, "interface/New_Game");		
 		optionsButton = new GButton((int)startButton.getX(), (int)startButton.getY() - 50/2 - 30,
 								200, 50, "interface/Options");
@@ -29,10 +29,10 @@ public class MainMenuScreen implements Screen {
 		quitButton = new GButton((int)startButton.getX(), (int)creditsButton.getY() - 50/2 - 30,
 				200, 50, "interface/Quit");
 		
-		backButton = new GButton(SASUS.viewport.getScreenWidth()/2 - 200/2, SASUS.viewport.getScreenHeight()/2 - 50/2,
+		backButton = new GButton(800/2 - 200/2, 600/2 - 50/2,
 				200, 50, "interface/Back");
 		
-		slider = new GSlider(SASUS.viewport.getScreenWidth()/2 - 300/2, SASUS.viewport.getScreenHeight()/2 + 50/2);
+		slider = new GSlider(800/2 - 300/2, 600/2 + 50/2, 50);
 		
 		arrow = new Sprite(Resources.getImage("interface/Arrow"));
 		arrow.setX(startButton.getX() - 25 - 20);

@@ -14,7 +14,7 @@ public class GSlider extends GElement
 	private int value;
 	private boolean selected;
 	
-	GSlider(int _x, int _y)
+	GSlider(int _x, int _y, int _value)
 	{
 		rect = new Rectangle(_x, _y, 300, 50);
 		
@@ -23,10 +23,10 @@ public class GSlider extends GElement
 		sliderScale.setY(rect.y);
 		
 		sliderSlide = new Sprite(Resources.getImage("interface/SliderSlide"));
-		sliderSlide.setX(rect.x + rect.width/2 - 18/2);
+		sliderSlide.setX(_value * rect.width / 100 + rect.x - 18/2);
 		sliderSlide.setY(rect.y);
 		
-		value = 50;
+		value = _value;
 		selected = false;
 	}
 	
