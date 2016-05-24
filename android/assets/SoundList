@@ -3,3 +3,7 @@ vox/countdown
 vox/stageComplete
 ui/select
 ui/confirm
+weapon/laser1
+weapon/laser2
+weapon/laser3
+ship/engine_active_loop

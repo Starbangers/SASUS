@@ -16,6 +16,8 @@ public class Player {
 	float rot = 0;
 	float goalRot = 0;
 	
+	float gunCD = 0;
+	
 	int health = 10;
 	
 	float particleTime = 0;
@@ -26,6 +28,7 @@ public class Player {
 	}
 	
 	public void update(float deltaT) {
+		gunCD -= deltaT;
 		particleTime += deltaT;
 		
 		rot += (goalRot - rot)*deltaT*8;
@@ -41,6 +44,14 @@ public class Player {
 		if((GameScreen.left_button.isPressed() || Gdx.input.isKeyPressed(Input.Keys.LEFT)) && goalX > 0) {
 			goalX -= BASE_SPEED*deltaT;
 		}
+		if(Gdx.input.isKeyPressed(Input.Keys.UP) && gunCD < 0) {
+			gunCD = 1;
+			Resources.playSound("weapon/laser"+(int)(Math.random()*3+1));
+			for(int i = 0; i < 5; i ++)
+			CurGame.particles.add(new Particle(x+31.5f+(float)Math.cos(rot+Math.PI/2)*30, y+31.5f+(float)Math.sin(rot+Math.PI/2)*30, (float)Math.random()*80-40, (float)Math.random()*80-40, 4, 8, 0, 0.6f, 1));
+			CurGame.entities.add(new Projectile(x+31.5f+(float)Math.cos(rot+Math.PI/2)*25, y+31.5f+(float)Math.sin(rot+Math.PI/2)*25, (float)Math.cos(rot+Math.PI/2)*600, (float)Math.sin(rot+Math.PI/2)*600, 0, 0.6f, 1, 8, true, 1));
+		}
+		
 		
 		if(particleTime > 1/(speedX+10)) {
 			particleTime = 0;
@@ -55,7 +66,7 @@ public class Player {
 	}
 	
 	public void drawShapes() {
-		SASUS.shapeRenderer.setColor(0, 0.5f, 1f, 0.1f+(float)(0.05f*Math.random()));
+		SASUS.shapeRenderer.setColor(0, 0.5f, 1f, gunCD>0 ? gunCD/10 + (float)(0.05f*Math.random()) : (float)(0.05f*Math.random()));
 		
 		for(int i = 0; i < 5; i++) {
 			SASUS.shapeRenderer.circle(x+31.5f+(float)Math.cos(rot+Math.PI/2)*8, y+31.5f+(float)Math.sin(rot+Math.PI/2)*8, i*10);

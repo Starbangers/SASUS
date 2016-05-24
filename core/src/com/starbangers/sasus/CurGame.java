@@ -8,7 +8,7 @@ public class CurGame {
 	
 	public static Array<Vector2> stars = new Array<Vector2>();
 	public static Array<Particle> particles = new Array<Particle>();
-	
+	public static Array<Entity> entities = new Array<Entity>();
 	
 	public static final int NUM_STARS = 20;
 	
@@ -24,6 +24,11 @@ public class CurGame {
 		for(Particle part : particles) {
 			if(!part.tick(deltaT)) {
 				particles.removeValue(part, true);
+			}
+		}
+		for(Entity ent : entities) {
+			if(ent.tick(deltaT)) {
+				entities.removeValue(ent, true);
 			}
 		}
 	}
