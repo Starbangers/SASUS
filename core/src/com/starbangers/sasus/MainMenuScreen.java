@@ -8,9 +8,9 @@ import com.badlogic.gdx.utils.Array;
 
 public class MainMenuScreen implements Screen {
 	
-	private Array<GElement> buttons = new Array<GElement>();
+	private Array<GElement> elements = new Array<GElement>();
 	
-	private GButton startButton, quitButton, optionsButton;
+	private GButton startButton, quitButton, optionsButton, creditsButton;
 	private GSlider slider;
 	
 	private Sprite arrow;
@@ -20,15 +20,19 @@ public class MainMenuScreen implements Screen {
 	{
 		startButton = new GButton(SASUS.viewport.getScreenWidth()/2 - 200/2, SASUS.viewport.getScreenHeight()/2 - 50/2,
 								200, 50, "interface/New_Game");
-		buttons.add(startButton);
+		elements.add(startButton);
 		
 		optionsButton = new GButton((int)startButton.getX(), (int)startButton.getY() - 50/2 - 30,
 								200, 50, "interface/Options");
-		buttons.add(optionsButton);
+		elements.add(optionsButton);
 		
-		quitButton = new GButton((int)startButton.getX(), (int)optionsButton.getY() - 50/2 - 30,
-								200, 50, "interface/Quit");
-		buttons.add(quitButton);
+		creditsButton = new GButton((int)startButton.getX(), (int)optionsButton.getY() - 50/2 - 30,
+								200, 50, "interface/Credits");
+		elements.add(creditsButton);
+		
+		quitButton = new GButton((int)startButton.getX(), (int)creditsButton.getY() - 50/2 - 30,
+				200, 50, "interface/Quit");
+		elements.add(quitButton);
 		
 		slider = new GSlider(SASUS.viewport.getScreenWidth()/2 - 300/2, SASUS.viewport.getScreenHeight()/2 + 50/2);
 		
@@ -57,7 +61,7 @@ public class MainMenuScreen implements Screen {
 		}
 		
 		SASUS.batch.begin();
-		for (GElement current : buttons)
+		for (GElement current : elements)
 		{
 			current.update();
 			current.draw();
