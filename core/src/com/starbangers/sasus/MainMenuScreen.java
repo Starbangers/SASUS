@@ -11,7 +11,7 @@ public class MainMenuScreen implements Screen {
 	private Array<GElement> elements = new Array<GElement>();
 	
 	private GButton startButton, quitButton, optionsButton, creditsButton, backButton;
-	private GSlider slider;
+	private GSlider musicSlider;
 	private GImage creditsText;
 	
 	private Sprite arrow;
@@ -35,7 +35,7 @@ public class MainMenuScreen implements Screen {
 		
 		creditsText = new GImage(800/2 - 600/2, 600/2 - 180/2 + 100, "interface/CreditsText");
 		
-		slider = new GSlider(800/2 - 300/2, 600/2 + 50/2, 34);
+		musicSlider = new GSlider(800/2 - 300/2, 600/2 + 50/2, (int)Settings.musicVolume);
 		
 		arrow = new Sprite(Resources.getImage("interface/Arrow"));
 		arrow.setX(startButton.getX() - 25 - 20);
@@ -69,7 +69,8 @@ public class MainMenuScreen implements Screen {
 		SASUS.batch.begin();
 		for (GElement current : elements)
 		{
-			current.update();
+			if(!(current instanceof GImage))
+				current.update();
 			current.draw();
 			if (current instanceof GButton)
 			{
@@ -143,7 +144,7 @@ public class MainMenuScreen implements Screen {
 			elements.add(backButton);
 			break;
 		case OptionsState:
-			elements.add(slider);
+			elements.add(musicSlider);
 			elements.add(backButton);
 			break;
 		case MainState: //fall through to default
