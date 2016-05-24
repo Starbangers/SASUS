@@ -55,10 +55,13 @@ public class MainMenuScreen implements Screen {
 		SASUS.camera.update();
 		SASUS.batch.setProjectionMatrix(SASUS.camera.combined);
 		
-		if(prevArrowPos != arrow.getY()) {
+		/*
+		if(prevArrowPos != arrow.getY())
+		{
 			prevArrowPos = arrow.getY();
 			Resources.playSound("ui/select");
 		}
+		*/
 		
 		SASUS.batch.begin();
 		for (GElement current : elements)
@@ -82,7 +85,6 @@ public class MainMenuScreen implements Screen {
 		}
 		if (optionsButton.isJustReleased())
 		{
-			System.out.println("lel");
 			setState(State.OptionsState);
 		}
 		if (quitButton.isJustReleased())
