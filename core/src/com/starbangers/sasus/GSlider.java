@@ -50,20 +50,23 @@ public class GSlider extends GElement
 			Vector2 pos = SASUS.viewport.unproject(new Vector2(Gdx.input.getX(), Gdx.input.getY()));
 			if (!selected && rect.contains(pos))
 				selected = true;
-			if (pos.x < rect.x)
+			if(selected)
 			{
-				value = 0;
-				sliderSlide.setX(rect.x - 18/2);
-			}
-			else if (pos.x > rect.x + rect.width)
-			{
-				value = 100;
-				sliderSlide.setX(rect.x + rect.width - 18/2);
-			}
-			else
-			{
-				value = ((int)(pos.x - rect.x) * 100)/((int)(rect.width));
-				sliderSlide.setX(pos.x - 18/2);
+				if (pos.x < rect.x)
+				{
+					value = 0;
+					sliderSlide.setX(rect.x - 18/2);
+				}
+				else if (pos.x > rect.x + rect.width)
+				{
+					value = 100;
+					sliderSlide.setX(rect.x + rect.width - 18/2);
+				}
+				else
+				{
+					value = ((int)(pos.x - rect.x) * 100)/((int)(rect.width));
+					sliderSlide.setX(pos.x - 18/2);
+				}
 			}
 		}
 		else
