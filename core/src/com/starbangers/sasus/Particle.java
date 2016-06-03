@@ -26,6 +26,37 @@ public class Particle {
 		this.g = _g;
 		this.b = _b;
 	}
+	public Particle(Shape shape) {
+		this.shape = shape;
+	}
+	public Particle setPos(float x, float y) {
+		this.x = x;
+		this.y = y;
+		return this; //Method chaining
+	}
+	public Particle setVel(float x, float y) {
+		this.velX = x;
+		this.velY = y;
+		return this; //Method chaining
+	}
+	public Particle setColor(float r, float g, float b) {
+		this.r = r;
+		this.g = g;
+		this.b = b;
+		return this; //Method chaining
+	}
+	public Particle setGlowing(boolean glow) {
+		this.glow = glow;
+		return this;
+	}
+	public Particle setSizeAndDecay(float size, float decay) {
+		this.size = size;
+		this.decay = decay;
+		return this;
+	}
+	public void spawn() {
+		CurGame.particles.add(this);
+	}
 	
 	public Particle(float _x, float _y, float _velX, float _velY, float _size, float _decay, float _r, float _g, float _b) {
 		this(_x, _y, _velX, _velY, _size, _decay, _r, _g, _b, Shape.SQUARE, false);

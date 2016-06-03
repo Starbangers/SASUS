@@ -54,15 +54,23 @@ public class Player {
 		if(Gdx.input.isKeyPressed(Input.Keys.CONTROL_LEFT) && gunCD < 0) {
 			gunCD = 1;
 			Resources.playSound("weapon/laser"+(int)(Math.random()*3+1));
-			for(int i = 0; i < 5; i ++)
-			CurGame.particles.add(new Particle(x+31.5f+(float)Math.cos(rot+Math.PI/2)*30, y+31.5f+(float)Math.sin(rot+Math.PI/2)*30, (float)Math.random()*80-40, (float)Math.random()*80-40, 4, 4, 0, 0.6f, 1));
+			for(int i = 0; i < 5; i ++){
+				new Particle(Particle.Shape.SQUARE)
+				.setPos(x+31.5f+(float)Math.cos(rot+Math.PI/2)*30, y+31.5f+(float)Math.sin(rot+Math.PI/2)*30)
+				.setVel((float)Math.random()*80-40, (float)Math.random()*80-40)
+				.setSizeAndDecay(4, 4)
+				.setColor(0, 0.6f, 1).spawn();
+			}
 			CurGame.entities.add(new Projectile(x+31.5f+(float)Math.cos(rot+Math.PI/2)*25, y+31.5f+(float)Math.sin(rot+Math.PI/2)*25, (float)Math.cos(rot+Math.PI/2)*600+(goalX - x)*3, (float)Math.sin(rot+Math.PI/2)*600, 0, 0.6f, 1, 8, true, 1));
 		}
 		
 		
 		if(particleTime > 1/(speedX+10)) {
 			particleTime = 0;
-			CurGame.particles.add(new Particle(x+31.5f+(float)Math.cos(rot+Math.PI/2)*-35, y+31.5f+(float)Math.sin(rot+Math.PI/2)*-35, (float)(Math.random()*80-40), -20 - speedX*1.5f, 8, 16, 1, 0.7f+(float)Math.random()*0.2f, 0));
+			new Particle(Particle.Shape.SQUARE).setColor(1, 0.7f+(float)Math.random()*0.2f, 0)
+			.setPos(x+31.5f+(float)Math.cos(rot+Math.PI/2)*-35, y+31.5f+(float)Math.sin(rot+Math.PI/2)*-35)
+			.setVel((float)(Math.random()*80-40), -20 - speedX*1.5f)
+			.setSizeAndDecay(8, 16).spawn();
 		}
 	}
 	

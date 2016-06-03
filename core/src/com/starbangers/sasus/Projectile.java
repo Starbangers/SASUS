@@ -14,7 +14,11 @@ public class Projectile extends Entity {
 	public boolean tick(float deltaT) {
 		this.x += velX*deltaT;
 		this.y += velY*deltaT;
-		CurGame.particles.add(new Particle(x, y, (float)Math.random()*10-5, (float)Math.random()*10-5, 8, 32, r, g, b));
+		new Particle(Particle.Shape.SQUARE)
+		.setPos(x, y)
+		.setColor(r, g, b)
+		.setSizeAndDecay(8, 32)
+		.setVel((float)Math.random()*10-5, (float)Math.random()*10-5).spawn();
 		
 		if(this.x > 800+size) return true;
 		if(this.x < -size) return true;
