@@ -72,6 +72,11 @@ public class GameScreen implements Screen {
 		
 		SASUS.batch.begin();
 		CurGame.player.draw();
+		
+		for(Entity ent : CurGame.entities) {
+			ent.draw();
+		}
+		
 		if(useWidescreenLayout) {
 			leftBorder.draw(SASUS.batch);
 			rightBorder.draw(SASUS.batch);
