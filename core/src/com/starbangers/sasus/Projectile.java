@@ -20,6 +20,21 @@ public class Projectile extends Entity {
 		.setSizeAndDecay(8, 32)
 		.setVel((float)Math.random()*10-5, (float)Math.random()*10-5).spawn();
 		
+		for(int i = 0; i < CurGame.entities.size; i ++) {
+			if(CurGame.entities.get(i) instanceof Enemy) {
+				Enemy enemy = (Enemy)CurGame.entities.get(i);
+				if(enemy.sprite.getBoundingRectangle().contains(x, y)) {
+					enemy.getHit(damage, velX, velY);
+					for(int j = 0; j < 10; j ++) 
+						new Particle(Particle.Shape.SQUARE).setPos(x, y).setColor(r, g, b)
+						.setVel((float)Math.random()*200-100, (float) (Math.random()*200-100))
+						.setSizeAndDecay(8, 16).spawn();
+						
+					return true;
+				}
+			}
+		}
+		
 		if(this.x > 800+size) return true;
 		if(this.x < -size) return true;
 		if(this.y < -size) return true;

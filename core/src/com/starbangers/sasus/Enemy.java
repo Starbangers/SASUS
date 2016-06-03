@@ -1,6 +1,5 @@
 package com.starbangers.sasus;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
 public class Enemy extends Entity {
@@ -11,11 +10,20 @@ public class Enemy extends Entity {
 	float moveTime;
 	float jiggleTime;
 	float particleTime = 0;
-	private Sprite sprite;
+	Sprite sprite;
+	
+	int health = 10;
 	
 	public Enemy() {
 		sprite = new Sprite(Resources.getImage("enemies/tiny"));
 		sprite.setOrigin(31.5f, 31.5f);
+	}
+	
+	public void getHit(int damage, float mx, float my) {
+		this.health -= damage;
+		Resources.playSound("enemy/hit"+(int)(Math.random()*2+1));
+		this.velX += mx/3;
+		this.velY += my/3;
 	}
 	
 	@Override
@@ -25,19 +33,19 @@ public class Enemy extends Entity {
 		//jGoalX = goalX + (jiggle ? 30 : -30);
 		jGoalX = goalX;
 		//if(Math.abs(jGoalX-x)>10)
-		aX = Math.min( Math.max( ((jGoalX-x)-velX*100), -3), 3)*deltaT;
+		aX = Math.min( Math.max( ((jGoalX-x)-velX), -250), 250);
 		//else
 		//aX = 0;
-		velX += aX;
+		velX += aX*deltaT;
 		//if(Math.abs(goalY-y)>10)
-		aY = Math.min( Math.max( ((goalY-y)-velY*100), -3), 3)*deltaT;
-		velY += aY;
+		aY = Math.min( Math.max( ((goalY-y)-velY), -250), 250);
+		velY += aY*deltaT;
 		
 		rot += (goalRot - rot)*deltaT*2;
-		goalRot = -aX*10;
+		goalRot = -aX/200;
 		
-		x += velX;
-		y += velY;
+		x += velX*deltaT;
+		y += velY*deltaT;
 		
 		jiggleTime -= deltaT;
 		if(jiggleTime < 0) {
@@ -56,7 +64,7 @@ public class Enemy extends Entity {
 			//Gdx.app.log("AI", "Moving to "+(int)goalX+":"+(int)goalY);
 		}
 		particleTime++;
-		if(particleTime > 1/(Math.abs(velX/10)+Math.abs(velY/10)+0.1)&&(Math.sqrt(aX*aX+aY*aY)>0.05)) {
+		if(particleTime > 1/(Math.abs(velX/200)+Math.abs(velY/200)+0.1)&&(Math.sqrt(aX*aX+aY*aY)>100)) {
 			particleTime = 0;
 			new Particle(Particle.Shape.SQUARE).setColor(1, 0, 0.7f+(float)Math.random()*0.2f)
 			.setPos(x+31.5f+(float)Math.cos(rot+Math.PI/2+Math.PI/6)*-25, y+31.5f+(float)Math.sin(rot+Math.PI/2+Math.PI/6)*-25)

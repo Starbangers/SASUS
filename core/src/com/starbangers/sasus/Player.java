@@ -52,7 +52,7 @@ public class Player {
 			goalX -= BASE_SPEED*deltaT;
 		}
 		if(Gdx.input.isKeyPressed(Input.Keys.CONTROL_LEFT) && gunCD < 0) {
-			gunCD = 1;
+			gunCD = 0.5;
 			Resources.playSound("weapon/laser"+(int)(Math.random()*3+1));
 			for(int i = 0; i < 5; i ++){
 				new Particle(Particle.Shape.SQUARE)
