@@ -21,7 +21,7 @@ public class Enemy extends Entity {
 	
 	public void getHit(int damage, float mx, float my) {
 		this.health -= damage;
-		Resources.playSound("enemy/hit"+(int)(Math.random()*2+1));
+		Resources.playSound("enemy/hit2");
 		this.velX += mx/3;
 		this.velY += my/3;
 	}
