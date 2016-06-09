@@ -62,14 +62,14 @@ public class Enemy extends Entity {
 		
 		
 		//RANDOM MOVEMENT, TO BE REPLACED WITH VANYA's STUFF
-		/*moveTime -= deltaT;
+		moveTime -= deltaT;
 		if(moveTime < 0) {
 			
 			moveTime = (float) (1 + Math.random()*3);
 			this.goalX = (float) (32+Math.random()*700);
 			this.goalY = (float) (150+Math.random()*400);
 			//Gdx.app.log("AI", "Moving to "+(int)goalX+":"+(int)goalY);
-		}*/
+		}
 		particleTime++;
 		if(particleTime > 1/(Math.abs(velX/200)+Math.abs(velY/200)+0.1)&&(Math.sqrt(aX*aX+aY*aY)>100)) {
 			particleTime = 0;
