@@ -18,7 +18,14 @@ public class Enemy extends Entity {
 		sprite = new Sprite(Resources.getImage("enemies/tiny"));
 		sprite.setOrigin(31.5f, 31.5f);
 	}
-	
+	public Enemy setPos(float x, float y) {
+		this.x = x;
+		this.y = y;
+		return this;
+	}
+	public void spawn() {
+		CurGame.entities.add(this);
+	}
 	public void getHit(int damage, float mx, float my) {
 		this.health -= damage;
 		Resources.playSound("enemy/hit2");
