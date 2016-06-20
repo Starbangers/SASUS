@@ -58,7 +58,7 @@ public class EnemyGroup
 	
 	public boolean isDead()
 	{
-		return enemies.size == 0;
+		return false;
 	}
 	
 	public void tick(double deltaT)
@@ -73,12 +73,21 @@ public class EnemyGroup
 			cooldownTime = 0.5f;
 		}
 		
-		for (int i = 0; i < enemies.size; i++)
+		for (int i = enemies.size - 1; i >= 0; i--)
 		{
-			paths.get(i).tick(deltaT);
-			Vector2 newPos = paths.get(i).getCurrentPoint();
-			enemies.get(i).goalX = newPos.x;
-			enemies.get(i).goalY = newPos.y;
+			if (enemies.get(i).isDead)
+			{
+				enemies.removeIndex(i);
+				paths.removeIndex(i);
+				enemiesCount--;
+			}
+			else
+			{
+				paths.get(i).tick(deltaT);
+				Vector2 newPos = paths.get(i).getCurrentPoint();
+				enemies.get(i).goalX = newPos.x;
+				enemies.get(i).goalY = newPos.y;
+			}
 		}
 	}
 }
