@@ -41,7 +41,7 @@ public class Path
 		if (finished)
 			return;
 		
-		t += deltaT * 0.05f;
+		t += deltaT * 0.5f;
 			
 		if (t >= 1)
 		{

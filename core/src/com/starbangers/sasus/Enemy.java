@@ -12,7 +12,7 @@ public class Enemy extends Entity {
 	float particleTime = 0;
 	Sprite sprite;
 	
-	int health = 10;
+	int health = 4;
 	
 	public Enemy() {
 		sprite = new Sprite(Resources.getImage("enemies/tiny"));
@@ -31,7 +31,7 @@ public class Enemy extends Entity {
 		Resources.playSound("enemy/hit2");
 		//this.velX += mx/3;
 		//this.velY += my/3;
-		if(this.health < 0) {
+		if(this.health <= 0) {
 			isDead = true;
 		}
 	}

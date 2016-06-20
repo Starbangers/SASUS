@@ -44,7 +44,7 @@ public class EnemyGroup
 		{
 			Path path = initialPath.clone();
 			
-			Vector2 endingPoint = new Vector2(random.nextFloat() * 800, random.nextFloat() * 600);
+			Vector2 endingPoint = new Vector2(random.nextFloat() * 800, random.nextFloat() * 400+200);
 			path.addCurve(new Vector2(startingPoint.x, startingPoint.y + 10), new Vector2(endingPoint.x, endingPoint.y - 10), endingPoint);
 			
 			paths.add(path);
@@ -58,7 +58,7 @@ public class EnemyGroup
 	
 	public boolean isDead()
 	{
-		return false;
+		return enemies.size == 0;
 	}
 	
 	public void tick(double deltaT)
@@ -68,10 +68,9 @@ public class EnemyGroup
 		if (GameMaster.getWaveTime() > startTime && enemies.size < enemiesCount && cooldownTime < 0)
 		{
 			enemies.add(new Enemy());
-			enemies.peek().spawn();
-			enemies.peek().setPos(startingPoint.x, startingPoint.y);
+			enemies.peek().setPos(startingPoint.x, startingPoint.y).spawn();;
 			
-			cooldownTime = 1;
+			cooldownTime = 0.5f;
 		}
 		
 		for (int i = 0; i < enemies.size; i++)
