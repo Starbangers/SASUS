@@ -28,7 +28,7 @@ public class Path
 		curves = new Array<BezierCurve>();
 		
 		for (BezierCurve curve : _curves)
-			curves.add(curve.clone());
+			curves.add(curve);
 	}
 	
 	public void addCurve(Vector2 _B, Vector2 _C, Vector2 _D)
