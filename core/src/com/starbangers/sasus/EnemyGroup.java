@@ -8,11 +8,13 @@ import com.badlogic.gdx.utils.Array;
 public class EnemyGroup
 {
 	private Random random;
-	private float startTime;
+	private float startTime, cooldownTime = 1;
 	private int enemiesCount, curvesCount;
 	
 	private Vector2 startingPoint;
 	private Array<Path> paths;
+	
+	private Array<Enemy> enemies;
 	
 	public EnemyGroup(float _startTime, int _enemiesCount, Random _random)
 	{
@@ -46,14 +48,35 @@ public class EnemyGroup
 		}
 	}
 	
-	public void register() {
+	public void register()
+	{
 		GameMaster.groups.add(this);
 	}
 	
-	public boolean isDead() {
+	public boolean isDead()
+	{
 		return false;
 	}
-	public void tick(double deltaT) {
+	
+	public void tick(double deltaT)
+	{
+		cooldownTime -= deltaT;
 		
+		if (GameMaster.getWaveTime() > startTime && enemies.size < enemiesCount && cooldownTime < 0)
+		{
+			enemies.add(new Enemy());
+			enemies.peek().spawn();
+			enemies.peek().setPos(startingPoint.x, startingPoint.y);
+			
+			cooldownTime = 1;
+		}
+		
+		for (int i = 0; i < enemies.size; i++)
+		{
+			paths.get(i).tick(deltaT);
+			Vector2 newPos = paths.get(i).getCurrentPoint();
+			enemies.get(i).goalX = newPos.x;
+			enemies.get(i).goalY = newPos.y;
+		}
 	}
 }
