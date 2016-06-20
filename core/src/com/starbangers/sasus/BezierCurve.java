@@ -73,4 +73,9 @@ public class BezierCurve // Cubic Bezier curve
 	{
 		return D;
 	}
+	
+	public BezierCurve clone()
+	{
+		return new BezierCurve(A, B, C, D);
+	}
 }
