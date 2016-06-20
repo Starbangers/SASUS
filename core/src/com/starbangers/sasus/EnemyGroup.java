@@ -30,12 +30,12 @@ public class EnemyGroup
 		createEnemy();
 	}
 	
-	public void tick()
+	public void tick(double deltaT)
 	{
 		for (int i = 0; i < createdEnemies.size; i++)
 		{
-			if (enemyT.get(i) + 0.005 <= 1)
-				enemyT.set(i, enemyT.get(i) + 0.005f);			
+			if (enemyT.get(i) + deltaT <= 1)
+				enemyT.set(i, (float) (enemyT.get(i) + deltaT));			
 			
 			Vector2 newPos = path.calculatePointForT(enemyT.get(i));
 			createdEnemies.get(i).goalX = newPos.x;
