@@ -18,12 +18,13 @@ public class EnemyGroup
 	
 	public EnemyGroup(float _startTime, int _enemiesCount, Random _random)
 	{
+		enemies = new Array<Enemy>();
 		random = _random;
 		startTime = _startTime;
 		enemiesCount = _enemiesCount;
 		curvesCount = random.nextInt(5) + 1;
 		
-		paths = new Array<Path>(enemiesCount);
+		paths = new Array<Path>();
 		
 		startingPoint = new Vector2();
 
@@ -39,12 +40,14 @@ public class EnemyGroup
 					new Vector2(random.nextFloat() * 800, random.nextFloat() * 600),
 					new Vector2(random.nextFloat() * 800, random.nextFloat() * 600));
 		
-		for (Path path : paths)
+		for (int i = 0; i < enemiesCount; i ++)
 		{
-			path = initialPath.clone();
+			Path path = initialPath.clone();
 			
 			Vector2 endingPoint = new Vector2(random.nextFloat() * 800, random.nextFloat() * 600);
 			path.addCurve(new Vector2(startingPoint.x, startingPoint.y + 10), new Vector2(endingPoint.x, endingPoint.y - 10), endingPoint);
+			
+			paths.add(path);
 		}
 	}
 	

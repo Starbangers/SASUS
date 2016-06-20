@@ -31,12 +31,16 @@ public class Enemy extends Entity {
 		Resources.playSound("enemy/hit2");
 		//this.velX += mx/3;
 		//this.velY += my/3;
+		if(this.health < 0) {
+			isDead = true;
+		}
 	}
 	
 	@Override
 	public boolean tick(float deltaT) {
 		float aX, aY, jGoalX;
 		
+		if(this.isDead) return true;
 		//jGoalX = goalX + (jiggle ? 30 : -30);
 		jGoalX = goalX;
 		//if(Math.abs(jGoalX-x)>10)
