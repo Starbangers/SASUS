@@ -26,7 +26,6 @@ public class EnemyGroup
 		startingPoint = new Vector2();
 		startingPoint.x = Math.random() > 0.5 ? -100 : 900;
 		startingPoint.y = (float) (Math.random() * 800 - 100);
-		
 		for (Path path : paths)
 		{
 			path = new Path(startingPoint, new Vector2(), new Vector2(), new Vector2());
@@ -38,4 +37,10 @@ public class EnemyGroup
 		GameMaster.groups.add(this);
 	}
 	
+	public boolean isDead() {
+		return false;
+	}
+	public void tick(double deltaT) {
+		
+	}
 }
