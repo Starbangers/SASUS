@@ -1,5 +1,7 @@
 package com.starbangers.sasus;
 
+import com.badlogic.gdx.utils.Array;
+
 public class GameMaster {
 	
 	int waveNum = 0;
@@ -8,6 +10,7 @@ public class GameMaster {
 	int wave = 0;
 	static int level = 1;
 	
+	static Array<EnemyGroup> groups = new Array<EnemyGroup>();
 	
 	static boolean countedDown, saidStageNum;
 	public static void startLevel() {
