@@ -25,7 +25,9 @@ public class GameMaster {
 		for(int i = 0; i < Math.random()*3+1; i ++)
 			new EnemyGroup(i*10, (int)Math.random()*9+1, new Random());
 	}
-	
+	public static float getWaveTime() {
+		return waveTime;
+	}
 	public static void tick(double deltaT) {
 		waveTime += deltaT;
 		
