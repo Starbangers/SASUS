@@ -105,7 +105,7 @@ public class GameScreen implements Screen {
 		for(int i = 0; i < CurGame.player.health; i ++) {
 			SASUS.shapeRenderer.rect(HPpos, 280+i*32, 60, 32);
 		}
-	
+		
 		SASUS.shapeRenderer.end();
 		Gdx.gl.glDisable(GL20.GL_BLEND);
 		
@@ -126,6 +126,8 @@ public class GameScreen implements Screen {
 			} else if(GameMaster.waveTime < 0) {
 				SASUS.font.draw(SASUS.batch, "1", 400, 300); 
 			}
+		} else {
+			SASUS.font.draw(SASUS.batch, "Stage "+GameMaster.level, 200, 300); 
 		}
 		
 		SASUS.batch.end();
