@@ -1,6 +1,7 @@
 package com.starbangers.sasus;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -17,16 +18,17 @@ public class SASUS extends Game {
 	public static SASUS gmae;
 	
 	public static BitmapFont font;
+	
 	@Override
 	public void create () {
-		font = new BitmapFont();
+		font = new BitmapFont(Gdx.files.internal("fonts/P2P.fnt"));
 		font.setColor(Color.GREEN);
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, 800, 600);
 		viewport = new ExtendViewport(800, 600, camera);
 		batch = new SpriteBatch();
 		shapeRenderer = new ShapeRenderer();
-		font.getData().setScale(2);
+		font.getData().setScale(0.3f);
 		Resources.reset();
 		Resources.loadVital();
 		

@@ -17,8 +17,8 @@ public class CurGame {
 		particles.clear();
 		stars.clear();
 		entities.clear();
-		for(int i = 0; i < 5; i ++)
-		entities.add(new Enemy());
+		/*for(int i = 0; i < 5; i ++)
+		entities.add(new Enemy());*/
 		for(int i = 0; i < NUM_STARS; i ++)
 			stars.add(new Vector2((float)Math.random()*800, (float) (Math.random()*600)));
 	}

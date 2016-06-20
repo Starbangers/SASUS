@@ -6,5 +6,6 @@ public class GameManager {
 		CurGame.reset();
 		SASUS.gmae.setScreen(new GameScreen());
 		Resources.playMusic("sanch-disaster");
+		GameMaster.startLevel();
 	}
 }

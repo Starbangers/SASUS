@@ -145,7 +145,7 @@ public class Resources {
 
 		}
 		status = 111;
-		sounds.get("vox/initComplete").play();
+		//sounds.get("vox/initComplete").play();
 		playMusic("sanch-escape");
 	}
 	
