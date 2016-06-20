@@ -13,12 +13,22 @@ public class Path
 
 	public Path(Vector2 _A, Vector2 _B, Vector2 _C, Vector2 _D)
 	{
+		curves = new Array<BezierCurve>();
 		curves.add(new BezierCurve(_A, _B, _C, _D));
 	}
 	
 	public Path(BezierCurve _curve)
 	{
+		curves = new Array<BezierCurve>();
 		curves.add(_curve);
+	}
+	
+	private Path(Array<BezierCurve> _curves)
+	{
+		curves = new Array<BezierCurve>();
+		
+		for (BezierCurve curve : _curves)
+			curves.add(curve.clone());
 	}
 	
 	public void addCurve(Vector2 _B, Vector2 _C, Vector2 _D)
@@ -55,5 +65,10 @@ public class Path
 	public boolean isFinished()
 	{
 		return finished;
+	}
+	
+	public Path clone()
+	{
+		return new Path(curves);
 	}
 }

@@ -19,18 +19,29 @@ public class EnemyGroup
 		random = _random;
 		startTime = _startTime;
 		enemiesCount = _enemiesCount;
-		curvesCount = random.nextInt() * (5 - 1) + 1;
+		curvesCount = random.nextInt(5) + 1;
 		
 		paths = new Array<Path>(enemiesCount);
 		
 		startingPoint = new Vector2();
-		startingPoint.x = Math.random() > 0.5 ? -100 : 900;
-		startingPoint.y = (float) (Math.random() * 800 - 100);
+		startingPoint.x = random.nextFloat() > 0.5 ? -100 : 900;
+		startingPoint.y = random.nextFloat() * (700 + 100) - 100;
+		
+		Path initialPath = new Path(startingPoint, new Vector2(random.nextFloat() * 800, random.nextFloat() * 600),
+				new Vector2(random.nextFloat() * 800, random.nextFloat() * 600),
+				new Vector2(random.nextFloat() * 800, random.nextFloat() * 600));
+		
+		for (int i = curvesCount - 1; i > 0; i--)
+			initialPath.addCurve(new Vector2(random.nextFloat() * 800, random.nextFloat() * 600), 
+					new Vector2(random.nextFloat() * 800, random.nextFloat() * 600),
+					new Vector2(random.nextFloat() * 800, random.nextFloat() * 600));
 		
 		for (Path path : paths)
 		{
-			path = new Path(startingPoint, new Vector2(), new Vector2(), new Vector2());
+			path = initialPath.clone();
 			
+			Vector2 endingPoint = new Vector2(random.nextFloat() * 800, random.nextFloat() * 600);
+			path.addCurve(new Vector2(startingPoint.x, startingPoint.y + 10), new Vector2(endingPoint.x, endingPoint.y - 10), endingPoint);
 		}
 	}
 	
