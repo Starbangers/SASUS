@@ -1,6 +1,12 @@
 vox/initComplete
 vox/countdown
 vox/stageComplete
+vox/stage
+vox/5
+vox/4
+vox/3
+vox/2
+vox/1
 ui/select
 ui/confirm
 weapon/laser1

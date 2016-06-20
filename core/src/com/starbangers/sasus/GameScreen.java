@@ -57,6 +57,8 @@ public class GameScreen implements Screen {
 			butt.update();
 		}
 		
+		GameMaster.tick(deltaT);
+		
 		CurGame.player.update(deltaT);
 		CurGame.tick(deltaT);
 		
@@ -111,6 +113,21 @@ public class GameScreen implements Screen {
 		for(int i = 0; i < 10; i ++) {
 			SASUS.batch.draw(Resources.getImage("HUD/hpBar"), HPpos, 280+i*32);
 		}
+		
+		if(GameMaster.waveTime > -5) {
+			if(GameMaster.waveTime < -4) {
+				SASUS.font.draw(SASUS.batch, "5", 400, 300);
+			} else if(GameMaster.waveTime < -3) {
+				SASUS.font.draw(SASUS.batch, "4", 400, 300); 
+			} else if(GameMaster.waveTime < -2) {
+				SASUS.font.draw(SASUS.batch, "3", 400, 300); 
+			} else if(GameMaster.waveTime < -1) {
+				SASUS.font.draw(SASUS.batch, "2", 400, 300); 
+			} else if(GameMaster.waveTime < 0) {
+				SASUS.font.draw(SASUS.batch, "1", 400, 300); 
+			}
+		}
+		
 		SASUS.batch.end();
 	}
 

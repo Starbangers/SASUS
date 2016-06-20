@@ -29,8 +29,8 @@ public class Enemy extends Entity {
 	public void getHit(int damage, float mx, float my) {
 		this.health -= damage;
 		Resources.playSound("enemy/hit2");
-		this.velX += mx/3;
-		this.velY += my/3;
+		//this.velX += mx/3;
+		//this.velY += my/3;
 	}
 	
 	@Override
@@ -40,12 +40,12 @@ public class Enemy extends Entity {
 		//jGoalX = goalX + (jiggle ? 30 : -30);
 		jGoalX = goalX;
 		//if(Math.abs(jGoalX-x)>10)
-		aX = Math.min( Math.max( ((jGoalX-x)-velX), -250), 250);
+		aX = Math.min( Math.max( ((jGoalX-x)-velX), -500), 500);
 		//else
 		//aX = 0;
 		velX += aX*deltaT;
 		//if(Math.abs(goalY-y)>10)
-		aY = Math.min( Math.max( ((goalY-y)-velY), -250), 250);
+		aY = Math.min( Math.max( ((goalY-y)-velY), -500), 500);
 		velY += aY*deltaT;
 		
 		rot += (goalRot - rot)*deltaT*2;
@@ -62,14 +62,14 @@ public class Enemy extends Entity {
 		
 		
 		//RANDOM MOVEMENT, TO BE REPLACED WITH VANYA's STUFF
-		moveTime -= deltaT;
+		/*moveTime -= deltaT;
 		if(moveTime < 0) {
 			
 			moveTime = (float) (1 + Math.random()*3);
 			this.goalX = (float) (32+Math.random()*700);
 			this.goalY = (float) (150+Math.random()*400);
 			//Gdx.app.log("AI", "Moving to "+(int)goalX+":"+(int)goalY);
-		}
+		}*/
 		particleTime++;
 		if(particleTime > 1/(Math.abs(velX/200)+Math.abs(velY/200)+0.1)&&(Math.sqrt(aX*aX+aY*aY)>100)) {
 			particleTime = 0;
