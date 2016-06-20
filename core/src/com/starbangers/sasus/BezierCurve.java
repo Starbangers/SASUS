@@ -73,4 +73,9 @@ public class BezierCurve // Cubic Bezier curve
 	{
 		return D;
 	}
+	
+	public float getLength()
+	{
+		
+	}
 }

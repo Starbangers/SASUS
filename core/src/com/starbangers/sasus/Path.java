@@ -9,20 +9,16 @@ public class Path
 	private int currentCurve;
 	private float t;
 	
-	private boolean flag;
+	private boolean finished;
 
 	public Path(Vector2 _A, Vector2 _B, Vector2 _C, Vector2 _D)
 	{
 		curves.add(new BezierCurve(_A, _B, _C, _D));
-		currentCurve = 0;
-		flag = false;
 	}
 	
 	public Path(BezierCurve _curve)
 	{
 		curves.add(_curve);
-		currentCurve = 0;
-		flag = false;
 	}
 	
 	public void addCurve(Vector2 _B, Vector2 _C, Vector2 _D)
@@ -32,27 +28,32 @@ public class Path
 	
 	public void tick(double deltaT)
 	{
-		if (!flag)
+		if (finished)
+			return;
+		
+		t += deltaT * 0.05f;
+			
+		if (t >= 1)
 		{
-			t += deltaT * 0.05f;
-			
-			if (t >= 1)
-			{
-				t = 0;
-				currentCurve++;
-			}
-			
-			if (currentCurve == curves.size)
-			{
-				t = 1;
-				currentCurve--;
-				flag = true;
-			}
+			t = 0;
+			currentCurve++;
+		}
+		
+		if (currentCurve == curves.size)
+		{
+			t = 1;
+			currentCurve--;
+			finished = true;
 		}
 	}
 	
 	public Vector2 getCurrentPoint()
 	{
 		return curves.get(currentCurve).calculatePointForT(t);
+	}
+	
+	public boolean isFinished()
+	{
+		return finished;
 	}
 }
