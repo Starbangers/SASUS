@@ -8,7 +8,7 @@ import com.badlogic.gdx.utils.Array;
 public class EnemyGroup
 {
 	private float startTime, cooldownTime = 1;
-	private int nextEnemy, spawnedEnemies, curvesCount;
+	private int nextEnemy, curvesCount;
 	private boolean isDestroyed;
 	
 	private Vector2 startingPoint;
@@ -44,8 +44,9 @@ public class EnemyGroup
 		{
 			Path path = initialPath.clone();
 			
+			Vector2 pathLastPoint = path.getLastPoint();
 			Vector2 endingPoint = new Vector2(_random.nextFloat() * (800 - size), _random.nextFloat() * ((600 - size) - 200) + 200);
-			path.addCurve(new Vector2(startingPoint.x, startingPoint.y + 10), new Vector2(endingPoint.x, endingPoint.y - 10), endingPoint);
+			path.addCurve(new Vector2(pathLastPoint.x, pathLastPoint.y + 10), new Vector2(endingPoint.x, endingPoint.y - 10), endingPoint);
 			
 			paths.add(path);
 		}
@@ -69,18 +70,17 @@ public class EnemyGroup
 		{
 			enemies.get(nextEnemy).setPos(startingPoint.x, startingPoint.y).spawn();
 			nextEnemy++;
-			spawnedEnemies++;
 			
 			cooldownTime = 0.5f;
 		}
 		
-		for (int i = spawnedEnemies - 1; i >= 0; i--)
+		for (int i = nextEnemy - 1; i >= 0; i--)
 		{
 			if (enemies.get(i).isDead)
 			{
 				enemies.removeIndex(i);
 				paths.removeIndex(i);
-				spawnedEnemies--;
+				nextEnemy--;
 				
 				isDestroyed = enemies.size == 0;
 			}

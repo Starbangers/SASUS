@@ -62,6 +62,11 @@ public class Path
 		return curves.get(currentCurve).calculatePointForT(t);
 	}
 	
+	public Vector2 getLastPoint()
+	{
+		return curves.peek().getD();
+	}
+	
 	public boolean isFinished()
 	{
 		return finished;
