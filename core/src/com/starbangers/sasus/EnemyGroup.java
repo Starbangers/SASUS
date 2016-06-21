@@ -44,7 +44,7 @@ public class EnemyGroup
 		{
 			Path path = initialPath.clone();
 			
-			Vector2 endingPoint = new Vector2(random.nextFloat() * 800, random.nextFloat() * 400+200);
+			Vector2 endingPoint = new Vector2(random.nextFloat() * (800 - 64), random.nextFloat() * ((600 - 64) - 200) + 200);
 			path.addCurve(new Vector2(startingPoint.x, startingPoint.y + 10), new Vector2(endingPoint.x, endingPoint.y - 10), endingPoint);
 			
 			paths.add(path);
