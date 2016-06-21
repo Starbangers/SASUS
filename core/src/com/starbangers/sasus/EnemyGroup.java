@@ -10,6 +10,7 @@ public class EnemyGroup
 	private Random random;
 	private float startTime, cooldownTime = 1;
 	private int enemiesCount, curvesCount;
+	private boolean isDestroyed;
 	
 	private Vector2 startingPoint;
 	private Array<Path> paths;
@@ -58,7 +59,7 @@ public class EnemyGroup
 	
 	public boolean isDead()
 	{
-		return false;
+		return isDestroyed;
 	}
 	
 	public void tick(double deltaT)
@@ -80,6 +81,8 @@ public class EnemyGroup
 				enemies.removeIndex(i);
 				paths.removeIndex(i);
 				enemiesCount--;
+				
+				isDestroyed = enemiesCount == 0;
 			}
 			else
 			{
