@@ -7,9 +7,8 @@ import com.badlogic.gdx.utils.Array;
 
 public class EnemyGroup
 {
-	private Random random;
 	private float startTime, cooldownTime = 1;
-	private int enemiesCount, curvesCount;
+	private int nextEnemy, spawnedEnemies, curvesCount;
 	private boolean isDestroyed;
 	
 	private Vector2 startingPoint;
@@ -17,35 +16,35 @@ public class EnemyGroup
 	
 	private Array<Enemy> enemies;
 	
-	public EnemyGroup(float _startTime, Array<Enemy> array, Random _random)
+	public EnemyGroup(float _startTime, Array<Enemy> _enemies, Random _random)
 	{
-		enemies = new Array<Enemy>();
-		random = _random;
+		enemies = _enemies;
 		startTime = _startTime;
-		enemiesCount = array.size;
-		curvesCount = random.nextInt(5) + 1;
+		curvesCount = _random.nextInt(5) + 1;
 		
 		paths = new Array<Path>();
 		
 		startingPoint = new Vector2();
 
-		startingPoint.x = random.nextFloat() > 0.5 ? -100 : 900;
-		startingPoint.y = random.nextFloat() * (700 + 100) - 100;
+		startingPoint.x = _random.nextFloat() > 0.5 ? -100 : 900;
+		startingPoint.y = _random.nextFloat() * (700 + 100) - 100;
 		
-		Path initialPath = new Path(startingPoint, new Vector2(random.nextFloat() * (800 - 64), random.nextFloat() * ((600 - 64) - 200) + 200),
-				new Vector2(random.nextFloat() * (800 - 64), random.nextFloat() * ((600 - 64) - 200) + 200),
-				new Vector2(random.nextFloat() * (800 - 64), random.nextFloat() * ((600 - 64) - 200) + 200));
+		int size = enemies.get(0).getSize();
+		
+		Path initialPath = new Path(startingPoint, new Vector2(_random.nextFloat() * (800 - size), _random.nextFloat() * ((600 - size) - 200) + 200),
+				new Vector2(_random.nextFloat() * (800 - size), _random.nextFloat() * ((600 - size) - 200) + 200),
+				new Vector2(_random.nextFloat() * (800 - size), _random.nextFloat() * ((600 - size) - 200) + 200));
 		
 		for (int i = curvesCount - 1; i > 0; i--)
-			initialPath.addCurve(new Vector2(random.nextFloat() * (800 - 64), random.nextFloat() * ((600 - 64) - 200) + 200), 
-					new Vector2(random.nextFloat() * (800 - 64), random.nextFloat() * ((600 - 64) - 200) + 200),
-					new Vector2(random.nextFloat() * (800 - 64), random.nextFloat() * ((600 - 64) - 200) + 200));
+			initialPath.addCurve(new Vector2(_random.nextFloat() * (800 - size), _random.nextFloat() * ((600 - size) - 200) + 200), 
+					new Vector2(_random.nextFloat() * (800 - size), _random.nextFloat() * ((600 - size) - 200) + 200),
+					new Vector2(_random.nextFloat() * (800 - size), _random.nextFloat() * ((600 - size) - 200) + 200));
 		
-		for (int i = 0; i < enemiesCount; i ++)
+		for (int i = 0; i < enemies.size; i ++)
 		{
 			Path path = initialPath.clone();
 			
-			Vector2 endingPoint = new Vector2(random.nextFloat() * (800 - 64), random.nextFloat() * ((600 - 64) - 200) + 200);
+			Vector2 endingPoint = new Vector2(_random.nextFloat() * (800 - size), _random.nextFloat() * ((600 - size) - 200) + 200);
 			path.addCurve(new Vector2(startingPoint.x, startingPoint.y + 10), new Vector2(endingPoint.x, endingPoint.y - 10), endingPoint);
 			
 			paths.add(path);
@@ -66,23 +65,24 @@ public class EnemyGroup
 	{
 		cooldownTime -= deltaT;
 		
-		if (GameMaster.getWaveTime() > startTime && enemies.size < enemiesCount && cooldownTime < 0)
+		if (GameMaster.getWaveTime() > startTime && nextEnemy < enemies.size && cooldownTime < 0)
 		{
-			enemies.add(new Enemy());
-			enemies.peek().setPos(startingPoint.x, startingPoint.y).spawn();;
+			enemies.get(nextEnemy).setPos(startingPoint.x, startingPoint.y).spawn();
+			nextEnemy++;
+			spawnedEnemies++;
 			
 			cooldownTime = 0.5f;
 		}
 		
-		for (int i = enemies.size - 1; i >= 0; i--)
+		for (int i = spawnedEnemies - 1; i >= 0; i--)
 		{
 			if (enemies.get(i).isDead)
 			{
 				enemies.removeIndex(i);
 				paths.removeIndex(i);
-				enemiesCount--;
+				spawnedEnemies--;
 				
-				isDestroyed = enemiesCount == 0;
+				isDestroyed = enemies.size == 0;
 			}
 			else
 			{
