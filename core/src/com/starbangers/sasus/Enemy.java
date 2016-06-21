@@ -34,6 +34,15 @@ public class Enemy extends Entity {
 		//this.velY += my/3;
 		if(this.health <= 0) {
 			isDead = true;
+			Resources.playSound("enemy/explode");
+			for(int i = 0; i < 80; i ++) {
+				new Particle(Particle.Shape.SQUARE).setPos(this.x + (float)Math.random()*this.getSize(), (float) (this.y + Math.random()*this.getSize()))
+				.setVel((float)Math.random()*200 - 100, (float)Math.random()*100)
+				.setFadingColors(1, 1, 0, 0.6f, 0, 0)
+				.setSizeAndDecay(8, 4)
+				.setGravity(500)
+				.spawn();
+			}
 		}
 	}
 	

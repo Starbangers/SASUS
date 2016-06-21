@@ -15,3 +15,4 @@ weapon/laser3
 ship/engine_active_loop
 enemy/hit1
 enemy/hit2
+enemy/explode

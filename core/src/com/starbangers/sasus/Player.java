@@ -61,7 +61,7 @@ public class Player {
 				.setSizeAndDecay(4, 4)
 				.setColor(0, 0.6f, 1).spawn();
 			}
-			CurGame.entities.add(new Projectile(x+31.5f+(float)Math.cos(rot+Math.PI/2)*25, y+31.5f+(float)Math.sin(rot+Math.PI/2)*25, (float)Math.cos(rot+Math.PI/2)*600, (float)Math.sin(rot+Math.PI/2)*600, 0, 0.6f, 1, 8, true, 1));
+			CurGame.entities.add(new Projectile(x+31.5f+(float)Math.cos(rot+Math.PI/2)*25, y+31.5f+(float)Math.sin(rot+Math.PI/2)*25, (float)Math.cos(rot+Math.PI/2)*1200, (float)Math.sin(rot+Math.PI/2)*1200, 0, 0.6f, 1, 8, true, 2));
 		}
 		
 		
