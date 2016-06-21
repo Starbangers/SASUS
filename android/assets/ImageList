@@ -14,6 +14,7 @@ interface/ScreenBorders
 interface/control_left
 interface/control_right
 interface/control_fire
+interface/Continue
 HUD/hpBar
 HUD/leftHUD
 player/ref
