@@ -19,7 +19,7 @@ public class Projectile extends Entity {
 		.setColor(r, g, b)
 		.setSizeAndDecay(8, 32)
 		.setVel((float)Math.random()*10-5, (float)Math.random()*10-5).spawn();
-		
+		if(this.isFriendly)
 		for(int i = 0; i < CurGame.entities.size; i ++) {
 			if(CurGame.entities.get(i) instanceof Enemy) {
 				Enemy enemy = (Enemy)CurGame.entities.get(i);
@@ -35,6 +35,16 @@ public class Projectile extends Entity {
 			}
 		}
 		
+		else
+		if(CurGame.player.sprite.getBoundingRectangle().contains(x, y)) {
+			CurGame.player.getHit(damage);
+			for(int j = 0; j < 10; j ++) 
+				new Particle(Particle.Shape.SQUARE).setPos(x, y).setColor(r, g, b)
+				.setVel((float)Math.random()*200-100, (float) (Math.random()*200-100))
+				.setSizeAndDecay(8, 16).spawn();
+				
+			return true;
+		}
 		if(this.x > 800+size) return true;
 		if(this.x < -size) return true;
 		if(this.y < -size) return true;

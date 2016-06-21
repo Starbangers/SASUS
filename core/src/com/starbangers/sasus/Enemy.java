@@ -50,6 +50,12 @@ public class Enemy extends Entity {
 	public boolean tick(float deltaT) {
 		float aX, aY, jGoalX;
 		
+		
+		if(Math.random()>0.99) {
+			CurGame.entities.add(new Projectile(x+31.5f+(float)Math.cos(rot+Math.PI/2)*-25, y+31.5f+(float)Math.sin(rot+Math.PI/2)*-25, (float)Math.cos(rot+Math.PI/2)*-500, (float)Math.sin(rot+Math.PI/2)*-500, 1, 0, 1, 8, false, 1));
+		}
+		
+		
 		if(this.isDead) return true;
 		//jGoalX = goalX + (jiggle ? 30 : -30);
 		jGoalX = goalX;
@@ -68,11 +74,6 @@ public class Enemy extends Entity {
 		x += velX*deltaT;
 		y += velY*deltaT;
 		
-		jiggleTime -= deltaT;
-		if(jiggleTime < 0) {
-			jiggleTime = 1;
-			jiggle = !jiggle;
-		}
 		
 		
 		//RANDOM MOVEMENT, TO BE REPLACED WITH VANYA's STUFF

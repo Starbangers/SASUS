@@ -8,7 +8,7 @@ public class Player {
 	public static final float BASE_SPEED = 250;
 	
 	
-	private Sprite sprite;
+	Sprite sprite;
 	
 	float x = 300;
 	float goalX = 300;
@@ -52,7 +52,7 @@ public class Player {
 			goalX -= BASE_SPEED*deltaT;
 		}
 		if(Gdx.input.isKeyPressed(Input.Keys.CONTROL_LEFT) && gunCD < 0) {
-			gunCD = 0.5f;
+			gunCD = 0.3f;
 			Resources.playSound("weapon/laser"+(int)(Math.random()*3+1));
 			for(int i = 0; i < 5; i ++){
 				new Particle(Particle.Shape.SQUARE)
@@ -61,7 +61,7 @@ public class Player {
 				.setSizeAndDecay(4, 4)
 				.setColor(0, 0.6f, 1).spawn();
 			}
-			CurGame.entities.add(new Projectile(x+31.5f+(float)Math.cos(rot+Math.PI/2)*25, y+31.5f+(float)Math.sin(rot+Math.PI/2)*25, (float)Math.cos(rot+Math.PI/2)*1200, (float)Math.sin(rot+Math.PI/2)*1200, 0, 0.6f, 1, 8, true, 2));
+			CurGame.entities.add(new Projectile(x+31.5f+(float)Math.cos(rot+Math.PI/2)*25, y+31.5f+(float)Math.sin(rot+Math.PI/2)*25, (float)Math.cos(rot+Math.PI/2)*1000, (float)Math.sin(rot+Math.PI/2)*1000, 0, 0.6f, 1, 8, true, 2));
 		}
 		
 		
@@ -92,5 +92,9 @@ public class Player {
 		for(int i = 0; i < 5; i++) {
 			SASUS.shapeRenderer.circle(x+31.5f+(float)Math.cos(rot+Math.PI/2)*-35, y+31.5f+(float)Math.sin(rot+Math.PI/2)*-35, i*10);
 		}
+	}
+
+	public void getHit(int damage) {
+		this.health -= damage;
 	}
 }
