@@ -91,6 +91,10 @@ public class Enemy extends Entity {
 		return false;
 	}
 
+	public int getSize() {
+		return 64;
+	}
+	
 	@Override
 	public void draw() {
 		sprite.setPosition(x, y);
