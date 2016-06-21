@@ -75,7 +75,7 @@ public class Enemy extends Entity {
 			//Gdx.app.log("AI", "Moving to "+(int)goalX+":"+(int)goalY);
 		}*/
 		particleTime++;
-		if(particleTime > 1/(Math.abs(velX/200)+Math.abs(velY/200)+0.1)&&(Math.sqrt(aX*aX+aY*aY)>100)) {
+		if(particleTime > 1/(Math.abs(velX/200)+Math.abs(velY/200)+0.1)/*&&(Math.sqrt(aX*aX+aY*aY)>100)*/) {
 			particleTime = 0;
 			new Particle(Particle.Shape.SQUARE).setColor(1, 0, 0.7f+(float)Math.random()*0.2f)
 			.setPos(x+31.5f+(float)Math.cos(rot+Math.PI/2+Math.PI/6)*-25, y+31.5f+(float)Math.sin(rot+Math.PI/2+Math.PI/6)*-25)

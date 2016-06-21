@@ -79,12 +79,7 @@ public class GameScreen implements Screen {
 			ent.draw();
 		}
 		
-		if(useWidescreenLayout) {
-			leftBorder.draw(SASUS.batch);
-			rightBorder.draw(SASUS.batch);
-		} else {
-			SASUS.batch.draw(Resources.getImage("HUD/leftHUD"), -XTension, 0);
-		}
+		
 		
 		
 		
@@ -101,15 +96,12 @@ public class GameScreen implements Screen {
 			part.draw();
 		}
 		
-		SASUS.shapeRenderer.setColor(Color.WHITE);
-		for(int i = 0; i < CurGame.player.health; i ++) {
-			SASUS.shapeRenderer.rect(HPpos, 280+i*32, 60, 32);
-		}
 		
 		SASUS.shapeRenderer.end();
 		Gdx.gl.glDisable(GL20.GL_BLEND);
 		
 		SASUS.batch.begin();
+		
 		for(int i = 0; i < 10; i ++) {
 			SASUS.batch.draw(Resources.getImage("HUD/hpBar"), HPpos, 280+i*32);
 		}
