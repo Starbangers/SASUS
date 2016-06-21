@@ -23,7 +23,7 @@ public class GameMaster {
 		
 		//REPLACE WITH DIFFICULTY_BASED CHOICE
 		for(int i = 0; i < Math.random()*3+1; i ++)
-			new EnemyGroup(i*10, (int)Math.random()*4+5, new Random()).register();
+			new EnemyGroup(i*10, Enemy.makeArray((int)(Math.random()*4+5)), new Random()).register();
 	}
 	public static float getWaveTime() {
 		return waveTime;

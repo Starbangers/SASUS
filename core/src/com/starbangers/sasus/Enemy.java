@@ -1,6 +1,7 @@
 package com.starbangers.sasus;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.utils.Array;
 
 public class Enemy extends Entity {
 
@@ -93,6 +94,13 @@ public class Enemy extends Entity {
 
 	public int getSize() {
 		return 64;
+	}
+	
+	public static Array<Enemy> makeArray(int size) {
+		Array<Enemy> enem = new Array<Enemy>();
+		for(int i = 0; i < size; i ++)
+			enem.add(new Enemy());
+		return enem;
 	}
 	
 	@Override

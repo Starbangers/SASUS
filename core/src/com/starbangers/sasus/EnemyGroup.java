@@ -17,12 +17,12 @@ public class EnemyGroup
 	
 	private Array<Enemy> enemies;
 	
-	public EnemyGroup(float _startTime, int _enemiesCount, Random _random)
+	public EnemyGroup(float _startTime, Array<Enemy> array, Random _random)
 	{
 		enemies = new Array<Enemy>();
 		random = _random;
 		startTime = _startTime;
-		enemiesCount = _enemiesCount;
+		enemiesCount = array.size;
 		curvesCount = random.nextInt(5) + 1;
 		
 		paths = new Array<Path>();
