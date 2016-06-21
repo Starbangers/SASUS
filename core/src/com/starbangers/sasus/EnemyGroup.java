@@ -31,14 +31,14 @@ public class EnemyGroup
 		startingPoint.x = random.nextFloat() > 0.5 ? -100 : 900;
 		startingPoint.y = random.nextFloat() * (700 + 100) - 100;
 		
-		Path initialPath = new Path(startingPoint, new Vector2(random.nextFloat() * 800, random.nextFloat() * 600),
-				new Vector2(random.nextFloat() * 800, random.nextFloat() * 600),
-				new Vector2(random.nextFloat() * 800, random.nextFloat() * 600));
+		Path initialPath = new Path(startingPoint, new Vector2(random.nextFloat() * (800 - 64), random.nextFloat() * ((600 - 64) - 200) + 200),
+				new Vector2(random.nextFloat() * (800 - 64), random.nextFloat() * ((600 - 64) - 200) + 200),
+				new Vector2(random.nextFloat() * (800 - 64), random.nextFloat() * ((600 - 64) - 200) + 200));
 		
 		for (int i = curvesCount - 1; i > 0; i--)
-			initialPath.addCurve(new Vector2(random.nextFloat() * 800, random.nextFloat() * 600), 
-					new Vector2(random.nextFloat() * 800, random.nextFloat() * 600),
-					new Vector2(random.nextFloat() * 800, random.nextFloat() * 600));
+			initialPath.addCurve(new Vector2(random.nextFloat() * (800 - 64), random.nextFloat() * ((600 - 64) - 200) + 200), 
+					new Vector2(random.nextFloat() * (800 - 64), random.nextFloat() * ((600 - 64) - 200) + 200),
+					new Vector2(random.nextFloat() * (800 - 64), random.nextFloat() * ((600 - 64) - 200) + 200));
 		
 		for (int i = 0; i < enemiesCount; i ++)
 		{
