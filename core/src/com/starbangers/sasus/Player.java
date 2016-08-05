@@ -38,7 +38,7 @@ public class Player {
 		rot += (goalRot - rot)*deltaT*8;
 		goalRot = -(goalX-x)/200;
 		
-		x += (goalX - x)*deltaT*3;
+		x += (goalX - x)*deltaT*6;
 		
 		float speedX = Math.abs(goalX - x);
 		
