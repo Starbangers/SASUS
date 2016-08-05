@@ -32,6 +32,7 @@ public class Player {
 	}
 	
 	public void update(float deltaT) {
+		if(this.health <= 0) return;
 		gunCD -= deltaT;
 		particleTime += deltaT;
 		
@@ -81,6 +82,7 @@ public class Player {
 	}
 	
 	public void drawShapes() {
+		if(this.health <= 0) return;
 		SASUS.shapeRenderer.setColor(0, 0.5f, 1f, gunCD>0 ? gunCD/10 + (float)(0.05f*Math.random()) : (float)(0.05f*Math.random()));
 		
 		for(int i = 0; i < 5; i++) {
@@ -96,5 +98,17 @@ public class Player {
 
 	public void getHit(int damage) {
 		this.health -= damage;
+		Resources.playSound("enemy/hit1");
+		if(this.health <= 0) {
+			Resources.playSound("enemy/explode");
+			for(int i = 0; i < 80; i ++) {
+				new Particle(Particle.Shape.SQUARE).setPos(this.x + (float)Math.random()*64, (float) (this.y + Math.random()*64))
+				.setVel((float)Math.random()*200 - 100, (float)Math.random()*200-100)
+				.setFadingColors(1, 0.9f, 0, 0.6f, 0.2f, 0)
+				.setSizeAndDecay(9, 3)
+				.spawn();
+			}
+			sprite = new Sprite(Resources.getImage("null"));
+		}
 	}
 }

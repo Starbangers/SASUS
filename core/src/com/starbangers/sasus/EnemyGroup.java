@@ -86,7 +86,7 @@ public class EnemyGroup
 			}
 			else
 			{
-				paths.get(i).tick(deltaT);
+				paths.get(i).tick(deltaT*1.5f);
 				Vector2 newPos = paths.get(i).getCurrentPoint();
 				enemies.get(i).goalX = newPos.x;
 				enemies.get(i).goalY = newPos.y;

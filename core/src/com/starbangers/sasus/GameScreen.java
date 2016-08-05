@@ -102,9 +102,9 @@ public class GameScreen implements Screen {
 		
 		SASUS.batch.begin();
 		
-		for(int i = 0; i < 10; i ++) {
+		/*for(int i = 0; i < 10; i ++) {
 			SASUS.batch.draw(Resources.getImage("HUD/hpBar"), HPpos, 280+i*32);
-		}
+		}*/
 		
 		if(GameMaster.waveTime > -5) {
 			if(GameMaster.waveTime < -4) {
@@ -120,6 +120,14 @@ public class GameScreen implements Screen {
 			}
 		} else {
 			SASUS.font.draw(SASUS.batch, "Stage "+GameMaster.level, 200, 300); 
+		}
+		
+		if(CurGame.player.health <= 0) {
+			SASUS.font.getData().setScale(0.7f);
+			SASUS.font.draw(SASUS.batch, "Game Over", 200, 400);
+			SASUS.font.getData().setScale(0.5f);
+			SASUS.font.draw(SASUS.batch, "You lost on stage "+GameMaster.level, 130, 350);
+			SASUS.font.draw(SASUS.batch, "Press enter to exit", 140, 320);
 		}
 		
 		SASUS.batch.end();
